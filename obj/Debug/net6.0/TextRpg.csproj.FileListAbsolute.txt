@@ -1,0 +1,15 @@
+C:\HyungJun\TextRpg\bin\Debug\net6.0\TextRpg.exe
+C:\HyungJun\TextRpg\bin\Debug\net6.0\TextRpg.deps.json
+C:\HyungJun\TextRpg\bin\Debug\net6.0\TextRpg.runtimeconfig.json
+C:\HyungJun\TextRpg\bin\Debug\net6.0\TextRpg.dll
+C:\HyungJun\TextRpg\bin\Debug\net6.0\TextRpg.pdb
+C:\HyungJun\TextRpg\obj\Debug\net6.0\TextRpg.csproj.AssemblyReference.cache
+C:\HyungJun\TextRpg\obj\Debug\net6.0\TextRpg.GeneratedMSBuildEditorConfig.editorconfig
+C:\HyungJun\TextRpg\obj\Debug\net6.0\TextRpg.AssemblyInfoInputs.cache
+C:\HyungJun\TextRpg\obj\Debug\net6.0\TextRpg.AssemblyInfo.cs
+C:\HyungJun\TextRpg\obj\Debug\net6.0\TextRpg.csproj.CoreCompileInputs.cache
+C:\HyungJun\TextRpg\obj\Debug\net6.0\TextRpg.dll
+C:\HyungJun\TextRpg\obj\Debug\net6.0\refint\TextRpg.dll
+C:\HyungJun\TextRpg\obj\Debug\net6.0\TextRpg.pdb
+C:\HyungJun\TextRpg\obj\Debug\net6.0\TextRpg.genruntimeconfig.cache
+C:\HyungJun\TextRpg\obj\Debug\net6.0\ref\TextRpg.dll
