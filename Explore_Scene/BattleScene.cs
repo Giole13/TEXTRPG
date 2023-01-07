@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TextRpg.Game_Object;
 
-namespace TextRpg.In_Game_Scenes
+namespace TextRpg.Explore_Scene
 {
     // 전투 씬: 랜덤하게 몬스터, 보스를 등장시는 클래스
     public class BattleScene
@@ -21,7 +17,7 @@ namespace TextRpg.In_Game_Scenes
         public void BattleSystem()
         {
             SearchEnemey();     //적 설정
-            
+
 
             //적과 배틀
             new PlayerFightMonster(_MONSTER);
@@ -53,6 +49,6 @@ namespace TextRpg.In_Game_Scenes
 
         }
 
-        
+
     }
 }

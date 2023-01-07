@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TextRpg.Game_Object;
 
-namespace TextRpg.In_Game_Scenes
+namespace TextRpg.Explore_Scene
 {
     //몬스터와 직접 싸우는 것을 출력하는 클래스
     internal class PlayerFightMonster
@@ -35,10 +31,14 @@ namespace TextRpg.In_Game_Scenes
                 Console.ReadKey();
 
                 MonsterTurn();               //몬스터 턴
-                if (_monster.hp < 0)
+                if (_monster.hp <= 0)
                 {
+                    Console.Clear();
+                    _monster.PrintEnemyInfo();   //적 정보 프린트
+                    Player.PrintPlayerInfo();    //플레이어 정보 프린트
                     //플레이어의 승리 결과창으로
                     new Victory(_monster);
+                    break;
                 }
                 else if (Player._presentHp < 0)
                 {
@@ -48,7 +48,6 @@ namespace TextRpg.In_Game_Scenes
 
 
                 Console.ReadKey();
-                //break;
             }
 
         }

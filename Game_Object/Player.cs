@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TextRpg.Game_Object
 {
@@ -18,7 +15,8 @@ namespace TextRpg.Game_Object
         static public int _presentExp;      //현재경험치
         static public int _needMaxExp;      //레벨업에 필요한 경험치
 
-        static public Dictionary<Item, string> inventory;
+        static public Dictionary<string, Item> inventory = new Dictionary<string, Item>();
+
 
         static public void SetPlayername(string name)
         {

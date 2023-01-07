@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TextRpg.Game_Object
 {
@@ -15,7 +11,7 @@ namespace TextRpg.Game_Object
         public int experienceValue;      //경험치
         public int level;
         public int attack;
-
+        protected string[] item;
 
 
         //데미지를 반환하는 함수
@@ -60,6 +56,16 @@ namespace TextRpg.Game_Object
             ShowLevel();
             ShowAttack();
         }
+
+        //기본적으로 1, 2 번째 배열아이템을 반환함
+        public string RandomeItem()
+        {
+            Random rand = new Random();
+            string result = this.item[rand.Next(0, 1 + 1)];
+            return result;
+        }
+
+
     }
 
     public class ArmedGroup : Monster
@@ -71,7 +77,12 @@ namespace TextRpg.Game_Object
             this.experienceValue = 20;       //경험치
             this.level = 2;
             this.attack = 30;
+            this.item = new string[] { "천 조각", "무기 부품" };
         }
+
+
+
+
     }
 
     public class WildDog : Monster
@@ -83,6 +94,9 @@ namespace TextRpg.Game_Object
             this.experienceValue = 10;       //경험치
             this.level = 1;
             this.attack = 15;
+            this.item = new string[] { "들개의 송곳니", "털 갈퀴" };
+
+
         }
     }
 
@@ -95,6 +109,8 @@ namespace TextRpg.Game_Object
             this.experienceValue = 8;       //경험치
             this.level = 1;
             this.attack = 10;
+            this.item = new string[] { "랫의 증표", "두꺼운 가죽" };
+
         }
     }
 }

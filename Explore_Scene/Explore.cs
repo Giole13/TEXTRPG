@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace TextRpg.In_Game_Scenes
+namespace TextRpg.Explore_Scene
 {
     // 탐색 씬: 탐색이나 기지로 되돌아 갈 수 있는 선택지 씬
     public class Explore
     {
+        ConsoleKeyInfo cki;
         //전 씬으로 돌아 가는 변수
         private bool backScene = false;
-        
+
         public Explore()
         {
             ExploreProgress();
@@ -25,7 +22,7 @@ namespace TextRpg.In_Game_Scenes
             while (true)
             {
                 ExplorePrint();
-                ConsoleKeyInfo cki = Console.ReadKey();
+                cki = Console.ReadKey();
                 switch (cki.Key)
                 {
                     case ConsoleKey.D1:

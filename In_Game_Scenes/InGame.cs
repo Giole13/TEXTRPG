@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TextRpg.Explore_Scene;
 
 namespace TextRpg.In_Game_Scenes
 {
@@ -16,7 +12,7 @@ namespace TextRpg.In_Game_Scenes
             Progress();
         }
 
-        //전체적으로 진행하는 함수
+        //전체적으로 진행하는 함수 - 기지씬
         public void Progress()
         {
             while (true)
@@ -27,8 +23,8 @@ namespace TextRpg.In_Game_Scenes
                 HomeBase homebase = new HomeBase();
                 homebase.PrintBase();
                 ConsoleKeyInfo num = homebase.SelectScenes();
-                
-                
+
+
                 switch (num.Key)
                 {
                     case ConsoleKey.D1:
