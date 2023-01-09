@@ -22,15 +22,30 @@ namespace TextRpg.Explore_Scene
         {
             SelectBoss();
 
-            Console.Clear();
-            Player.PrintPlayerInfo();    //플레이어 정보 프린트
-            Console.WriteLine("====================");
-            //여기에 보스전 띄우기
-            Console.WriteLine("====================");
+            while (true)
+            {
+                Console.Clear();
+                Player.PrintPlayerInfo();    //플레이어 정보 프린트
+                Console.WriteLine("====================");
+                //여기에 보스전 띄우기
+                boss.PrintEnemyInfo();
+                Console.WriteLine("====================");
+                PlayerTurn();
 
+                BossTurn();
 
-
-
+                if (boss.hp <= 0)
+                {
+                    //플레이어의 승리 결과창으로
+                    new Victory(boss);
+                    break;
+                }
+                else if (Player._presentHp < 0)
+                {
+                    Console.WriteLine("당신은 죽었습니다.");
+                    Environment.Exit(0);
+                }
+            }
         }
 
         //전투 횟수에 따라 보스 결정
@@ -44,6 +59,39 @@ namespace TextRpg.Explore_Scene
             else { /*Do nothing*/}
         }
 
-        private void 
+
+        //플레이어 턴
+        private void PlayerTurn()
+        {
+            Console.WriteLine("1. 공격\t2. 스킬");
+            ConsoleKeyInfo cki = Console.ReadKey();
+            switch (cki.Key)
+            {
+                case ConsoleKey.D1:
+                    PlayerAttack();
+                    break;
+                case ConsoleKey.D2:
+                    break;
+                default:
+                    break;
+
+            }
+        }
+
+        private void PlayerAttack()
+        {
+            Console.WriteLine("{0} 이(가) {1}을(를) 공격했다!\n",
+                Player.GetPlayerName(), boss.GetMonsterName());
+            boss.hp -= Player._attack;
+        }
+
+
+        //보스의 공격
+        private void BossTurn()
+        {
+            Console.WriteLine("{0} 이(가) {1}을(를) 공격했다!\n",
+                 boss.GetMonsterName(), Player.GetPlayerName());
+            Player._presentHp -= boss.attack;
+        }
     }
 }

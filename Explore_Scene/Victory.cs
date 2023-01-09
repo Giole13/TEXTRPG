@@ -7,6 +7,7 @@ namespace TextRpg.Explore_Scene
     {
         Monster _monster;
         string monsterItem;
+        string[] monsterItems;
 
 
         public Victory(Monster monster)
@@ -19,21 +20,44 @@ namespace TextRpg.Explore_Scene
 
         public void WinResult()
         {
-            monsterItem = _monster.RandomeItem();
-            Item item = Item.allItem[monsterItem];
-            AddItemInventory(item);
-            //경험치랑 돈 얻는 함수도 추가
-            AddExp(_monster);
-            AddMoney(_monster);
 
-            Player.PrintPlayerInfo();
-            Console.WriteLine("===================");
-            //몬스터 싸운 결과물 출력
-            Console.WriteLine("당신은 이겼습니다!");
-            Console.WriteLine("{0}를 획득하였습니다!", monsterItem);
-            Console.WriteLine("===================");
-            new ShowInventory();
-            
+            if (_monster.boss == true)
+            {
+                foreach (string items in _monster.item)
+                {
+                    Item item = Item.allItem[items];
+                    AddItemInventory(item);
+                }
+                //경험치랑 돈 얻는 함수도 추가
+                AddExp(_monster);
+                AddMoney(_monster);
+
+                Player.PrintPlayerInfo();
+                Console.WriteLine("===================");
+                //몬스터 싸운 결과물 출력
+                Console.WriteLine("당신은 이겼습니다!");
+                Console.WriteLine("{0}를 획득하였습니다!", _monster.item[0]);
+                Console.WriteLine("{0}를 획득하였습니다!", _monster.item[1]);
+                Console.WriteLine("{0}를 획득하였습니다!", _monster.item[2]);
+                Console.WriteLine("===================");
+                new ShowInventory();
+            }
+            else {
+                monsterItem = _monster.RandomeItem();
+                Item item = Item.allItem[monsterItem];
+                AddItemInventory(item);
+                //경험치랑 돈 얻는 함수도 추가
+                AddExp(_monster);
+                AddMoney(_monster);
+
+                Player.PrintPlayerInfo();
+                Console.WriteLine("===================");
+                //몬스터 싸운 결과물 출력
+                Console.WriteLine("당신은 이겼습니다!");
+                Console.WriteLine("{0}를 획득하였습니다!", monsterItem);
+                Console.WriteLine("===================");
+                new ShowInventory();
+            }
 
 
         }

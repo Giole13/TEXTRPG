@@ -8,8 +8,7 @@ namespace TextRpg.Explore_Scene
     {
         ConsoleKeyInfo cki;
         //전 씬으로 돌아 가는 변수
-        private bool backScene = false;
-
+        private int bossCount = 0;
         public Explore()
         {
             ExploreProgress();
@@ -44,9 +43,9 @@ namespace TextRpg.Explore_Scene
         private void ExplorePrint()
         {
             Console.Clear();
-            Console.SetCursorPosition(20,0);
+            Console.SetCursorPosition(20, 0);
             Console.WriteLine("탐색");
-            Console.SetCursorPosition(0,0);
+            Console.SetCursorPosition(0, 0);
             Player.PrintPlayerInfo();
             Console.WriteLine("====================");
             Console.WriteLine("1. 탐색하기\t2. 돌아가기");
@@ -60,7 +59,8 @@ namespace TextRpg.Explore_Scene
             int num = rand.Next(1, 100 + 1);
             if (num > 30)
             {   //70퍼센트 확률로 전투
-                new BattleScene();
+                new BattleScene(bossCount);
+                ++bossCount;
             }
             else
             {   //30퍼센트 확률로 파밍
@@ -69,7 +69,7 @@ namespace TextRpg.Explore_Scene
 
         }
 
-        
+
     }       //  class Explore
 
 

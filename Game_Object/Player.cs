@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using System.Threading.Tasks;
+using TextRpg.In_Game_Scenes;
 
 namespace TextRpg.Game_Object
 {
@@ -19,6 +20,7 @@ namespace TextRpg.Game_Object
         static public int _presentExp;      //현재경험치
         static public int _needMaxExp;      //레벨업에 필요한 경험치
         static public int _money;           //가진 돈
+        static public Job plsyerJob;
 
         static public Dictionary<string, Item> inventory = new Dictionary<string, Item>();
 
@@ -66,6 +68,7 @@ namespace TextRpg.Game_Object
                 _attack = 40;
                 _presentExp = 0;      //현재경험치
                 _needMaxExp = 20;
+                plsyerJob = new Doctor();
             }
             else if (_job == "군인")
             {
@@ -75,6 +78,7 @@ namespace TextRpg.Game_Object
                 _attack = 80;
                 _presentExp = 0;      //현재경험치
                 _needMaxExp = 20;
+                plsyerJob = new Soldier();
             }
             else if (_job == "CEO")
             {
@@ -84,6 +88,7 @@ namespace TextRpg.Game_Object
                 _attack = 40;
                 _presentExp = 0;      //현재경험치
                 _needMaxExp = 20;
+                plsyerJob = new Ceo();
             }
             else { /*Do nothing*/}
         }

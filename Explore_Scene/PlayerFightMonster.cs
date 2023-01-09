@@ -1,5 +1,6 @@
 ﻿using System;
 using TextRpg.Game_Object;
+using TextRpg.In_Game_Scenes;
 
 namespace TextRpg.Explore_Scene
 {
@@ -9,7 +10,7 @@ namespace TextRpg.Explore_Scene
         private int bossCount;
         //몬스터 클래스
         private Monster _monster;
-
+        
 
 
         public PlayerFightMonster(Monster monster, int bossCountValue)
@@ -31,16 +32,14 @@ namespace TextRpg.Explore_Scene
                 _monster.PrintEnemyInfo();   //적 정보 프린트
                 Console.WriteLine("====================");
 
-                PlayerTurn();                //플레이어 턴
+                bool back = PlayerTurn();                //플레이어 턴
+                if (back) { return; }
 
                 Console.ReadKey();
 
                 MonsterTurn();               //몬스터 턴
                 if (_monster.hp <= 0)
                 {
-                    Console.Clear();
-                    _monster.PrintEnemyInfo();   //적 정보 프린트
-                    Player.PrintPlayerInfo();    //플레이어 정보 프린트
                     //플레이어의 승리 결과창으로
                     new Victory(_monster);
                     break;
@@ -58,7 +57,7 @@ namespace TextRpg.Explore_Scene
         }
 
         //전투 함수
-        private void PlayerTurn()
+        private bool PlayerTurn()
         {
             Console.WriteLine("1. 공격\t2. 스킬\t3. 도망");
             ConsoleKeyInfo cki = Console.ReadKey();
@@ -69,11 +68,45 @@ namespace TextRpg.Explore_Scene
                     PlayerAttack();
                     break;
                 case ConsoleKey.D2:
+                    PlayerSkill();
                     break;
                 case ConsoleKey.D3:
+                    return true;
+                default:
                     break;
             }
+            return false;
+        }
 
+        private void PlayerSkill()
+        {
+
+
+
+            Console.WriteLine("{0} 이(가) 스킬을 사용했다!", Player.GetPlayerName());
+            Job playerJob = Player.plsyerJob;
+            switch (playerJob)
+            {
+                case Doctor:
+                    //의사인 경우
+                    int heal = playerJob._jobSkill(Player._level);
+                    Player._presentHp += heal;
+                    if (Player._presentHp > Player._maxHp)
+                    {
+                        Player._presentHp = Player._maxHp;
+                    }
+                    Console.WriteLine("{0} 만큼 치료 했다!", heal);
+                    break;
+                case Soldier:
+                    //군인인 경우
+                        int damage = playerJob._jobSkill(Player._level);
+                    _monster.hp -= damage;
+                    Console.WriteLine("{0} 만큼 데미지를 줬다!", damage);
+                    break;
+                default:
+                    Console.WriteLine("하지만 아무런 일도 일어나지 않았다.");
+                    break;
+            }
         }
 
         private void PlayerAttack()

@@ -6,28 +6,29 @@ namespace TextRpg.Explore_Scene
     // 전투 씬: 랜덤하게 몬스터, 보스를 등장시는 클래스
     public class BattleScene
     {
-        private int bossCount = 0;
+        private int bossCount;
         private Monster _MONSTER;
 
-        public BattleScene()
+        public BattleScene(int bossCnt)
         {
+            this.bossCount = bossCnt;
             BattleSystem();
         }
 
         // 전투 씬에서의 전체 흐름
         public void BattleSystem()
         {
-            if (bossCount == 10)
+            if (bossCount == 10)    //10번 전투 달성시 랫의 여왕 등장
             {
                 //boss배틀
-                new PlayerFightBoss();
+                new PlayerFightBoss(bossCount);
             }
             else { /*Do noting*/}
 
             SearchEnemey();     //적 설정
             //적과 배틀
             new PlayerFightMonster(_MONSTER, bossCount);
-            ++bossCount;
+            
 
         }
 

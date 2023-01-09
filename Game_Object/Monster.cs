@@ -13,7 +13,7 @@ namespace TextRpg.Game_Object
         public int attack;
         public string[] item;
         public int haveMoney;
-
+        public bool boss = false;
 
         //데미지를 반환하는 함수
         public int ReturnAttack()
@@ -121,13 +121,14 @@ namespace TextRpg.Game_Object
         //랫의 여왕 보스
         public QueenOfRats()
         {
-            this.hp = 50;
+            this.boss = true;
+            this.hp = 1000;
             this.name = "랫의 여왕";
-            this.experienceValue = 8;       //경험치
-            this.level = 1;
-            this.attack = 10;
-            this.item = new string[] { "랫의 증표", "두꺼운 가죽" };
-            this.haveMoney = 200;
+            this.experienceValue = 500;       //경험치
+            this.level = 5;
+            this.attack = 100;
+            this.item = new string[] { "랫의 증표", "여왕의 페도라", "황금 반지" };
+            this.haveMoney = 500;
         }
     }
 

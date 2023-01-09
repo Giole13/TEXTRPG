@@ -8,7 +8,8 @@ namespace TextRpg.Game_Object
         static public Dictionary<string, Item> equipmentItem = new Dictionary<string, Item>();
         static public Dictionary<string, Item> combiItem = new Dictionary<string, Item>();
         static public Dictionary<string, Item> farmingItem = new Dictionary<string, Item>();
-        
+        static public Dictionary<string, Item> bossItem = new Dictionary<string, Item>();
+
 
         //아이템 스택
         private int itemStack = 1;  //아이템의 전체 스택
@@ -73,6 +74,10 @@ namespace TextRpg.Game_Object
             Item.equipmentItem.Add("모자", new Hat1());
             Item.equipmentItem.Add("가죽바지", new leatherpants());
 
+            Item.bossItem.Add("여왕의 페도라", new QueensFedora());
+            Item.bossItem.Add("황금 반지", new GoldRing());
+            
+
             Item.combiItem.Add("단단한 단검", new SimpleDagger());
             Item.combiItem.Add("붉은 너클", new RedKnuckle());
 
@@ -98,6 +103,14 @@ namespace TextRpg.Game_Object
         public QueensFedora()
         {
             this.plusHp = 1000;
+        }
+    }
+
+    public class GoldRing : Item
+    {
+        public GoldRing()
+        {
+            this.plusHp = 500;
         }
     }
     #endregion
