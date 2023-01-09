@@ -11,7 +11,8 @@ namespace TextRpg.Game_Object
         public int experienceValue;      //경험치
         public int level;
         public int attack;
-        protected string[] item;
+        public string[] item;
+        public int haveMoney;
 
 
         //데미지를 반환하는 함수
@@ -25,16 +26,18 @@ namespace TextRpg.Game_Object
         {
             return this.experienceValue;
         }
-        public void ShowAttack()
+
+        //돈 반환
+        public int ReturnMoney()
         {
-            Console.Write(this.attack);
+            return this.haveMoney;
         }
 
         //HP를 보여주는 함수
-        public void ShowHp()
-        {
-            Console.Write(this.hp);
-        }
+        //public void ShowHp()
+        //{
+        //    Console.Write(this.hp);
+        //}
 
         //이름을 반환 하는 함수
         public string GetMonsterName()
@@ -43,18 +46,18 @@ namespace TextRpg.Game_Object
         }
 
         //레벨을 보여주는 함수
-        public void ShowLevel()
-        {
-            Console.Write(this.level);
-        }
+        //public void ShowLevel()
+        //{
+        //    Console.Write(this.level);
+        //}
 
         // 적의 정보를 출력하는 함수
         public void PrintEnemyInfo()
         {
-            ShowHp();
-            Console.WriteLine(this.name);
-            ShowLevel();
-            ShowAttack();
+            Console.WriteLine("이름 : {0}", this.name);
+            Console.WriteLine("레벨 : {0}", this.level);
+            Console.WriteLine("공격력 : {0}", this.attack);
+            Console.WriteLine("현재 체력 : {0}", this.hp);
         }
 
         //기본적으로 1, 2 번째 배열아이템을 반환함
@@ -64,6 +67,8 @@ namespace TextRpg.Game_Object
             string result = this.item[rand.Next(0, 1 + 1)];
             return result;
         }
+
+
 
 
     }
@@ -78,11 +83,8 @@ namespace TextRpg.Game_Object
             this.level = 2;
             this.attack = 30;
             this.item = new string[] { "천 조각", "무기 부품" };
+            this.haveMoney = 100;
         }
-
-
-
-
     }
 
     public class WildDog : Monster
@@ -95,8 +97,7 @@ namespace TextRpg.Game_Object
             this.level = 1;
             this.attack = 15;
             this.item = new string[] { "들개의 송곳니", "털 갈퀴" };
-
-
+            this.haveMoney = 50;
         }
     }
 
@@ -110,7 +111,26 @@ namespace TextRpg.Game_Object
             this.level = 1;
             this.attack = 10;
             this.item = new string[] { "랫의 증표", "두꺼운 가죽" };
-
+            this.haveMoney = 200;
         }
     }
+
+    #region 보스라인
+    public class QueenOfRats : Monster
+    {
+        //랫의 여왕 보스
+        public QueenOfRats()
+        {
+            this.hp = 50;
+            this.name = "랫의 여왕";
+            this.experienceValue = 8;       //경험치
+            this.level = 1;
+            this.attack = 10;
+            this.item = new string[] { "랫의 증표", "두꺼운 가죽" };
+            this.haveMoney = 200;
+        }
+    }
+
+    #endregion
+
 }

@@ -1,4 +1,6 @@
-﻿using TextRpg.Game_Object;
+﻿using System.Collections.Generic;
+using TextRpg.Game_Object;
+using TextRpg.WareHouse_Scene;
 
 namespace TextRpg.Game_Setup_Stage
 {
@@ -26,20 +28,10 @@ namespace TextRpg.Game_Setup_Stage
             Player.SetPlayerStat();
 
             //아이템 딕셔너리 초기화
-            SetItem();
+            new SetItem();
 
-        }
-
-        private void SetItem()
-        {
-
-            Item.allItem.Add("모자", new Hat1());
-            Item.allItem.Add("천 조각", new ClothPiece());
-            Item.allItem.Add("무기 부품", new WeaponParts());
-            Item.allItem.Add("들개의 송곳니", new dogsFangs());
-            Item.allItem.Add("털 갈퀴", new FurRake());
-            Item.allItem.Add("랫의 증표", new RatToken());
-            Item.allItem.Add("두꺼운 가죽", new ThickLetter());
+            //창고 딕셔너리 초기화
+            new WareHouseDic();
         }
     }
 }

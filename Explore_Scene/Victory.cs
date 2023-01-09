@@ -20,21 +20,20 @@ namespace TextRpg.Explore_Scene
         public void WinResult()
         {
             monsterItem = _monster.RandomeItem();
-            Console.WriteLine("당신은 이겼습니다!");
-            Console.WriteLine("{0}를 획득하였습니다!", monsterItem);
             Item item = Item.allItem[monsterItem];
             AddItemInventory(item);
-            //++item.itemStack;
+            //경험치랑 돈 얻는 함수도 추가
+            AddExp(_monster);
+            AddMoney(_monster);
 
-
-            //인벤토리 보여주는 창
-            Console.WriteLine("{0} 의 개수 : {1}", monsterItem, item.itemStack);
-
-            foreach (var value in Player.inventory)
-            {
-                Console.WriteLine(value.Key);
-            }
-
+            Player.PrintPlayerInfo();
+            Console.WriteLine("===================");
+            //몬스터 싸운 결과물 출력
+            Console.WriteLine("당신은 이겼습니다!");
+            Console.WriteLine("{0}를 획득하였습니다!", monsterItem);
+            Console.WriteLine("===================");
+            new ShowInventory();
+            
 
 
         }
@@ -44,12 +43,25 @@ namespace TextRpg.Explore_Scene
         {
             if (Player.inventory.ContainsKey(monsterItem))
             {
-                ++item.itemStack;
+                item.ItemStackPlus();
+                item.ItemPreStackPlus();
             }
             else
             {
                 Player.inventory.Add(monsterItem, item);
+                item.ItemPreStackPlus();
             }
+        }
+
+        private void AddExp(Monster _monster)
+        {
+            Player._presentExp +=  _monster.ReturnExp();
+
+        }
+
+        private void AddMoney(Monster _monster)
+        {
+            Player.MoneyPlus(_monster.ReturnMoney());
         }
     }
 }

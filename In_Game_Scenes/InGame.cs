@@ -1,5 +1,7 @@
 ﻿using System;
 using TextRpg.Explore_Scene;
+using TextRpg.Store_Scene;
+using TextRpg.WareHouse_Scene;
 
 namespace TextRpg.In_Game_Scenes
 {
@@ -33,12 +35,16 @@ namespace TextRpg.In_Game_Scenes
                         break;
                     case ConsoleKey.D2:
                         //창고
+                        new WareHouse();
                         break;
                     case ConsoleKey.D3:
                         //상점
+                        new Store();
                         break;
                     case ConsoleKey.D4:
+                        new Combination();
                         //조합
+
                         break;
                     case ConsoleKey.Escape:
                         //게임종료

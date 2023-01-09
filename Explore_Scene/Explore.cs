@@ -1,4 +1,5 @@
 ﻿using System;
+using TextRpg.Game_Object;
 
 namespace TextRpg.Explore_Scene
 {
@@ -31,25 +32,23 @@ namespace TextRpg.Explore_Scene
                         RandomMoveScene();
                         break;
                     case ConsoleKey.D2:
-                        //기지로 돌아가기 -> 파밍한 것들을 결과로 보여주는 함수
-                        backScene = true;
-                        break;
+                        //기지로 돌아가기
+                        return;
                     default:
                         break;
-                }
-
-                //기지로 돌아가기
-                if (backScene)
-                {
-                    break;
                 }
             }
         }
 
-        //탐색에서 할 것을 출력해주는 함수
+        //탐색씬 출력 함수
         private void ExplorePrint()
         {
             Console.Clear();
+            Console.SetCursorPosition(20,0);
+            Console.WriteLine("탐색");
+            Console.SetCursorPosition(0,0);
+            Player.PrintPlayerInfo();
+            Console.WriteLine("====================");
             Console.WriteLine("1. 탐색하기\t2. 돌아가기");
         }
 
@@ -69,6 +68,8 @@ namespace TextRpg.Explore_Scene
             }
 
         }
+
+        
     }       //  class Explore
 
 

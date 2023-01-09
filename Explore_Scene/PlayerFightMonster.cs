@@ -4,15 +4,17 @@ using TextRpg.Game_Object;
 namespace TextRpg.Explore_Scene
 {
     //몬스터와 직접 싸우는 것을 출력하는 클래스
-    internal class PlayerFightMonster
+    public class PlayerFightMonster
     {
+        private int bossCount;
         //몬스터 클래스
         private Monster _monster;
 
 
 
-        public PlayerFightMonster(Monster monster)
+        public PlayerFightMonster(Monster monster, int bossCountValue)
         {
+            bossCount = 10 - bossCountValue;
             _monster = monster;
             FightProgress();
         }
@@ -23,8 +25,11 @@ namespace TextRpg.Explore_Scene
             while (true)
             {
                 Console.Clear();
-                _monster.PrintEnemyInfo();   //적 정보 프린트
+                Console.WriteLine("보스 출현까지 {0} 회 남았습니다.", bossCount);
                 Player.PrintPlayerInfo();    //플레이어 정보 프린트
+                Console.WriteLine("====================");
+                _monster.PrintEnemyInfo();   //적 정보 프린트
+                Console.WriteLine("====================");
 
                 PlayerTurn();                //플레이어 턴
 
