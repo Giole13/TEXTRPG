@@ -43,13 +43,14 @@ namespace TextRpg.Explore_Scene
         private void ExplorePrint()
         {
             Console.Clear();
-            Console.SetCursorPosition(20, 0);
-            Console.WriteLine("탐색");
             Console.SetCursorPosition(0, 0);
+            Console.WriteLine("탐색");
+            Console.SetCursorPosition(0, 1);
             Console.WriteLine("보스 출현까지 {0} 회 남았습니다.", 10 - bossCount);
+            Console.SetCursorPosition(0, 2);
             Player.PrintPlayerInfo();
             Console.WriteLine("====================");
-            Console.WriteLine("1. 탐색하기\t2. 돌아가기");
+            Console.WriteLine("1 : 탐색하기\t2 : 돌아가기");
         }
 
         //전투나 파밍으로 랜덤으로 보내주는 함수

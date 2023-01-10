@@ -300,11 +300,24 @@ namespace TextRpg.Store_Scene
                 //플레이어의 인벤토리에 같은 아이템이 있다면 해당 아이템의 개수를 하나 증가
                 if (Player.inventory.ContainsKey(itemNames))
                 {
+                    //사장일 경우 반값 할인
+                    if (Player.GetPlayerJob() == "CEO")
+                    {
+                        Player._money -= itemPrice[num - 1]/2;
+                        items.ItemStackPlus();
+                    }
+                    else { /*Do nothing*/}
                     Player._money -= itemPrice[num - 1];
                     items.ItemStackPlus();
                 }
                 else
                 {
+                    if (Player.GetPlayerJob() == "CEO")
+                    {
+                        Player._money -= itemPrice[num - 1] / 2;
+                        Player.inventory.Add(itemName[num - 1], itemList[num - 1]);
+                    }
+                    else { /*Do nothing*/}
                     Player._money -= itemPrice[num - 1];
                     Player.inventory.Add(itemName[num - 1], itemList[num - 1]);
                 }

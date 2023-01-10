@@ -101,23 +101,19 @@ namespace TextRpg.Game_Object
         static public void PrintPlayerInfo()
         {
             LevelupCheck();
-
-            Console.WriteLine("플레이어");
-            Console.WriteLine("이름\t: {0}", _name);
-            Console.WriteLine("직업\t: {0}", _job);
-            Console.WriteLine("레벨\t: {0}", _level);
-            Console.WriteLine("최대체력: {0}", _maxHp);
-            Console.WriteLine("현재체력: {0}", _presentHp);
-            Console.WriteLine("레벨업필요경험치: {0}", _needMaxExp);
-            Console.WriteLine("현재경험치: {0}", _presentExp);
-            Console.WriteLine("공격력\t: {0}", _attack + plusAttackPower);
-            Console.WriteLine("현재 가진돈: {0} 원", _money);
+            //─
+            //＿
+            Console.WriteLine("플레이어 스탯 ────────────────────────────────────────────");
+            Console.WriteLine("이름\t: {0}\t\t직업\t: {1}", _name, _job);
+            Console.WriteLine("레벨\t: {0}\t\t공격력\t: {1}", _level, _attack);
+            Console.Write("돈: {0}\t\t", _money);
+            Console.Write("체력: {0} / {1}\t\t", _presentHp , _maxHp);
+            Console.Write("경험치: {0} / {1}\n", _presentExp, _needMaxExp);
 
             //장비 슬릇 추가
             ShowEquipment();
             //장비 체크해서 스탯 변경
-           
-
+            Console.WriteLine("──────────────────────────────────────────────────────────");
         }
 
         static public void GetOffEquipment(Item equipment)

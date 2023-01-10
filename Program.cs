@@ -11,7 +11,8 @@ namespace TextRpg
         {
             // 게임 초기 설정
             // 플레이어 이름, 직업 설정
-            new SetGame();
+
+            //new SetGame();
 
 
             //인게임 진행
