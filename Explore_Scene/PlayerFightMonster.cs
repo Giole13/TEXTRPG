@@ -68,7 +68,7 @@ namespace TextRpg.Explore_Scene
                     PlayerAttack();
                     break;
                 case ConsoleKey.D2:
-                    PlayerSkill();
+                    new PlayerSkill(ref _monster);
                     break;
                 case ConsoleKey.D3:
                     return true;
@@ -76,37 +76,6 @@ namespace TextRpg.Explore_Scene
                     break;
             }
             return false;
-        }
-
-        private void PlayerSkill()
-        {
-
-
-
-            Console.WriteLine("{0} 이(가) 스킬을 사용했다!", Player.GetPlayerName());
-            Job playerJob = Player.plsyerJob;
-            switch (playerJob)
-            {
-                case Doctor:
-                    //의사인 경우
-                    int heal = playerJob._jobSkill(Player._level);
-                    Player._presentHp += heal;
-                    if (Player._presentHp > Player._maxHp)
-                    {
-                        Player._presentHp = Player._maxHp;
-                    }
-                    Console.WriteLine("{0} 만큼 치료 했다!", heal);
-                    break;
-                case Soldier:
-                    //군인인 경우
-                        int damage = playerJob._jobSkill(Player._level);
-                    _monster.hp -= damage;
-                    Console.WriteLine("{0} 만큼 데미지를 줬다!", damage);
-                    break;
-                default:
-                    Console.WriteLine("하지만 아무런 일도 일어나지 않았다.");
-                    break;
-            }
         }
 
         private void PlayerAttack()
@@ -126,5 +95,7 @@ namespace TextRpg.Explore_Scene
 
 
 
-    }
+    }       //class PlayerFightMonster
+
+    
 }

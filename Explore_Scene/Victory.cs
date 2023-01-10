@@ -26,7 +26,7 @@ namespace TextRpg.Explore_Scene
                 foreach (string items in _monster.item)
                 {
                     Item item = Item.allItem[items];
-                    AddItemInventory(item);
+                    AddItemInventory(item, items);
                 }
                 //경험치랑 돈 얻는 함수도 추가
                 AddExp(_monster);
@@ -41,11 +41,12 @@ namespace TextRpg.Explore_Scene
                 Console.WriteLine("{0}를 획득하였습니다!", _monster.item[2]);
                 Console.WriteLine("===================");
                 new ShowInventory();
+                Console.ReadKey();
             }
             else {
                 monsterItem = _monster.RandomeItem();
                 Item item = Item.allItem[monsterItem];
-                AddItemInventory(item);
+                AddItemInventory(item, monsterItem);
                 //경험치랑 돈 얻는 함수도 추가
                 AddExp(_monster);
                 AddMoney(_monster);
@@ -62,17 +63,21 @@ namespace TextRpg.Explore_Scene
 
         }
 
+
+
         //중복이라면 아이템 개수를 +1
-        private void AddItemInventory(Item item)
+        private void AddItemInventory(Item item, string monstersItem)
         {
-            if (Player.inventory.ContainsKey(monsterItem))
+
+
+            if (Player.inventory.ContainsKey(monstersItem))
             {
                 item.ItemStackPlus();
                 item.ItemPreStackPlus();
             }
             else
             {
-                Player.inventory.Add(monsterItem, item);
+                Player.inventory.Add(monstersItem, item);
                 item.ItemPreStackPlus();
             }
         }

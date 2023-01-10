@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TextRpg.Game_Object;
+using TextRpg.In_Game_Scenes;
 
 namespace TextRpg.Explore_Scene
 {
@@ -31,8 +32,10 @@ namespace TextRpg.Explore_Scene
                 boss.PrintEnemyInfo();
                 Console.WriteLine("====================");
                 PlayerTurn();
+                Console.ReadKey();
 
                 BossTurn();
+                Console.ReadKey();
 
                 if (boss.hp <= 0)
                 {
@@ -71,12 +74,14 @@ namespace TextRpg.Explore_Scene
                     PlayerAttack();
                     break;
                 case ConsoleKey.D2:
+                    new PlayerSkill(ref boss);
                     break;
                 default:
-                    break;
+                    break; 
 
             }
         }
+
 
         private void PlayerAttack()
         {

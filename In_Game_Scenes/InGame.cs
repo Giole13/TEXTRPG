@@ -1,5 +1,6 @@
 ﻿using System;
 using TextRpg.Explore_Scene;
+using TextRpg.Game_Object;
 using TextRpg.Store_Scene;
 using TextRpg.WareHouse_Scene;
 
@@ -53,6 +54,8 @@ namespace TextRpg.In_Game_Scenes
                     default:
                         break;
                 }
+                //기지로 돌아오면 체력회복
+                Player._presentHp = Player._maxHp;
 
                 if (gameover)
                 {

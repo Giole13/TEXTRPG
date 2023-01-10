@@ -46,6 +46,7 @@ namespace TextRpg.Explore_Scene
             Console.SetCursorPosition(20, 0);
             Console.WriteLine("탐색");
             Console.SetCursorPosition(0, 0);
+            Console.WriteLine("보스 출현까지 {0} 회 남았습니다.", 10 - bossCount);
             Player.PrintPlayerInfo();
             Console.WriteLine("====================");
             Console.WriteLine("1. 탐색하기\t2. 돌아가기");

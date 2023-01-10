@@ -8,23 +8,23 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\gudwn\\.nuget\\packages\\": {},
+    "C:\\Users\\KGA_08\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gudwn\\Desktop\\텍스트 알피지\\TEXTRPG\\TextRpg.csproj",
+      "projectUniqueName": "C:\\HyungJun\\TextRpg\\TextRpg.csproj",
       "projectName": "TextRpg",
-      "projectPath": "C:\\Users\\gudwn\\Desktop\\텍스트 알피지\\TEXTRPG\\TextRpg.csproj",
-      "packagesPath": "C:\\Users\\gudwn\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gudwn\\Desktop\\텍스트 알피지\\TEXTRPG\\obj\\",
+      "projectPath": "C:\\HyungJun\\TextRpg\\TextRpg.csproj",
+      "packagesPath": "C:\\Users\\KGA_08\\.nuget\\packages\\",
+      "outputPath": "C:\\HyungJun\\TextRpg\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\gudwn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\KGA_08\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

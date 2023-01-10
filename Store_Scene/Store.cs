@@ -8,11 +8,15 @@ namespace TextRpg.Store_Scene
     // 상점씬
     public class Store
     {
-        string[] itemName = new string[10];
+        List<string> itemName = new List<string>();
         int[] itemNum = new int[10];
         int[] itemPrice = new int[10];
         Item[] itemList = new Item[10];
         ConsoleKeyInfo cki;
+
+        List<string> sellItem = new List<string>();
+
+
         public Store()
         {
             StoreProgress();
@@ -63,6 +67,7 @@ namespace TextRpg.Store_Scene
                     break;
                 case ConsoleKey.D2:
                     //물건 판매씬으로
+                    SellScene();
                     break;
                 case ConsoleKey.D3:
                     //돌아가기
@@ -76,6 +81,110 @@ namespace TextRpg.Store_Scene
 
         }
 
+        //판매 씬
+        private void SellScene()
+        {
+            sellItem.Clear();
+            Console.Clear();
+            int num = 0;
+            //판매할 아이템 목록
+            foreach (string name in WareHouseDic.wareHouse.Keys)
+            {
+                Console.Write("{0}번 ", num + 1);
+                sellItem.Add(name);
+                Console.WriteLine("{0}", name);
+                ++num;
+            }
+            //아이템 선택
+            SelectSellItem();
+
+        }
+
+        private void SelectSellItem()
+        {
+            Console.WriteLine("판매할 아이템을 골라주세요");
+            Console.Write("입력해 주세요 : ");
+            ConsoleKeyInfo cki = Console.ReadKey();
+
+            switch (cki.Key)
+            {
+                case ConsoleKey.D1:
+                    SellItems(1);
+                    break;
+                case ConsoleKey.D2:
+                    SellItems(2);
+                    break;
+                case ConsoleKey.D3:
+                    SellItems(3);
+                    break;
+                case ConsoleKey.D4:
+                    SellItems(4);
+                    break;
+                case ConsoleKey.D5:
+                    SellItems(5);
+                    break;
+                case ConsoleKey.D6:
+                    SellItems(6);
+                    break;
+                case ConsoleKey.D7:
+                    SellItems(7);
+                    break;
+                case ConsoleKey.D8:
+                    SellItems(8);
+                    break;
+                case ConsoleKey.D9:
+                    SellItems(9);
+                    break;
+                case ConsoleKey.Escape:
+                    //돌아가기
+                    return;
+                default:
+                    break;
+
+
+            }
+        }
+
+        private void SellItems(int num)
+        {
+            if (sellItem.Count < num)
+            {
+                Console.WriteLine("\n다시 선택해주세요");
+                Console.ReadKey();
+                return;
+            }
+
+            Console.Clear();
+            Console.WriteLine("{0}을(를) 판매하시겠습니까?", sellItem[num - 1]);
+            Console.WriteLine("1. 판매\t2. 취소");
+            Console.Write("입력해주세요 : ");
+            ConsoleKeyInfo cki;
+            cki = Console.ReadKey();
+            switch (cki.Key)
+            {
+                case ConsoleKey.D1:
+                    //구입 결과 창으로
+                    SellResult(num);
+                    break;
+                case ConsoleKey.D2:
+                    break;
+            }
+
+
+        }
+
+        private void SellResult(int num)
+        {
+            WareHouseDic.wareHouse.Remove(sellItem[num - 1]);
+            Item sellitem = Item.allItem[sellItem[num - 1]];
+            Player._money += sellitem.price;
+            Console.WriteLine("{0} 아이템을 판매하였습니다!", sellItem[num - 1]);
+            Console.WriteLine("아이템을 판매하고 {0} 만큼 받았습니다!", sellitem.price);
+            Console.ReadKey();
+        }
+
+
+        #region 아이템 사는 시퀀스
         //아이템 목록을 보여주는 함수
         private void ShowItem()
         {
@@ -87,7 +196,7 @@ namespace TextRpg.Store_Scene
             {
                 Item items = item.Value;
                 itemNum[i] = i + 1;
-                itemName[i] = item.Key;
+                itemName.Add(item.Key);
                 itemPrice[i] = items.price;
                 itemList[i] = items;
 
@@ -149,6 +258,12 @@ namespace TextRpg.Store_Scene
 
         private void BuyAction(int num)
         {
+            if (itemName.Count < num)
+            {
+                Console.WriteLine("\n다시 선택해주세요");
+                Console.ReadKey();
+                return;
+            }
             Console.Clear();
             Console.WriteLine("{0}을(를) 구입하시겠습니까?", itemName[num - 1]);
             Console.WriteLine("1. 구입\t2. 취소");
@@ -198,7 +313,7 @@ namespace TextRpg.Store_Scene
             }
 
         }
-
+        #endregion
 
     }       //class Store
 }

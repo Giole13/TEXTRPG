@@ -1,4 +1,6 @@
-﻿using TextRpg.Game_Object;
+﻿using System;
+using System.Threading;
+using TextRpg.Game_Object;
 
 namespace TextRpg.In_Game_Scenes
 {
@@ -55,6 +57,45 @@ namespace TextRpg.In_Game_Scenes
         {
             _discount = true;
             _name = "사장";
+        }
+    }
+
+
+
+    //스킬 구현
+    public class PlayerSkill
+    {
+        public PlayerSkill(ref Monster monster)
+        {
+            PlayerSkills(ref monster);
+        }
+
+        private void PlayerSkills(ref Monster monster)
+        {
+            Console.WriteLine("{0} 이(가) 스킬을 사용했다!", Player.GetPlayerName());
+            Job playerJob = Player.plsyerJob;
+            switch (playerJob)
+            {
+                case Doctor:
+                    //의사인 경우
+                    int heal = playerJob._jobSkill(Player._level);
+                    Player._presentHp += heal;
+                    if (Player._presentHp > Player._maxHp)
+                    {
+                        Player._presentHp = Player._maxHp;
+                    }
+                    Console.WriteLine("{0} 만큼 치료 했다!", heal);
+                    break;
+                case Soldier:
+                    //군인인 경우
+                    int damage = playerJob._jobSkill(Player._level);
+                    monster.hp -= damage;
+                    Console.WriteLine("{0} 만큼 데미지를 줬다!", damage);
+                    break;
+                default:
+                    Console.WriteLine("하지만 아무런 일도 일어나지 않았다.");
+                    break;
+            }
         }
     }
 }

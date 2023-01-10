@@ -8,7 +8,6 @@ namespace TextRpg.Game_Object
         static public Dictionary<string, Item> equipmentItem = new Dictionary<string, Item>();
         static public Dictionary<string, Item> combiItem = new Dictionary<string, Item>();
         static public Dictionary<string, Item> farmingItem = new Dictionary<string, Item>();
-        static public Dictionary<string, Item> bossItem = new Dictionary<string, Item>();
 
 
         //아이템 스택
@@ -17,7 +16,9 @@ namespace TextRpg.Game_Object
         public int plusHp;
         public int price;
         public int attackPower;
-        public string[] needCombiItem;
+        public string[] needCombiItem;  //조합시 필요한 아이템 배열
+        public bool equipment = false;  //장비아이템 분류 여부
+        public bool mountItem = false;
 
 
 
@@ -60,23 +61,30 @@ namespace TextRpg.Game_Object
         }
         private void SetItems()
         {
-            //Item.allItem.Add("천 조각", new ClothPiece());
+            //allItem.Add
             Item.allItem.Add("천 조각", new ClothPiece());
             Item.allItem.Add("무기 부품", new WeaponParts());
             Item.allItem.Add("들개의 송곳니", new dogsFangs());
             Item.allItem.Add("털 갈퀴", new FurRake());
             Item.allItem.Add("랫의 증표", new RatToken());
             Item.allItem.Add("두꺼운 가죽", new ThickLetter());
+            Item.allItem.Add("푸른 약초", new GreenHerbs());
+            Item.allItem.Add("수상한 버섯", new Mushrooms());
+            Item.allItem.Add("모자", new Hat1());
+            Item.allItem.Add("가죽바지", new leatherpants());
+            Item.allItem.Add("여왕의 페도라", new QueensFedora());
+            Item.allItem.Add("황금 반지", new GoldRing());
+            Item.allItem.Add("단단한 단검", new SimpleDagger());
+            Item.allItem.Add("붉은 너클", new RedKnuckle());
 
+
+
+            //이하 용도별 아이템 딕셔너리
             Item.farmingItem.Add("푸른 약초", new GreenHerbs());
             Item.farmingItem.Add("수상한 버섯", new Mushrooms());
-            
+
             Item.equipmentItem.Add("모자", new Hat1());
             Item.equipmentItem.Add("가죽바지", new leatherpants());
-
-            Item.bossItem.Add("여왕의 페도라", new QueensFedora());
-            Item.bossItem.Add("황금 반지", new GoldRing());
-            
 
             Item.combiItem.Add("단단한 단검", new SimpleDagger());
             Item.combiItem.Add("붉은 너클", new RedKnuckle());
@@ -88,12 +96,45 @@ namespace TextRpg.Game_Object
     }
 
     #region 드랍 아이템 (몬스터)
-    public class ClothPiece : Item { }
-    public class WeaponParts : Item { }
-    public class dogsFangs : Item { }
-    public class FurRake : Item { }
-    public class RatToken : Item { }
-    public class ThickLetter : Item { }
+    public class ClothPiece : Item
+    {
+        public ClothPiece()
+        {
+            this.price = 10;
+        }
+
+    }
+    public class WeaponParts : Item
+    {
+        public WeaponParts()
+        {
+            this.price = 50;
+        }
+    }
+    public class dogsFangs : Item {
+        public dogsFangs()
+        {
+            this.price = 50;
+        }
+    }
+    public class FurRake : Item {
+        public FurRake()
+        {
+            this.price = 50;
+        }
+    }
+    public class RatToken : Item {
+        public RatToken()
+        {
+            this.price = 50;
+        }
+    }
+    public class ThickLetter : Item {
+        public ThickLetter()
+        {
+            this.price = 50;
+        }
+    }
 
     #endregion 드랍아이템
 
@@ -102,7 +143,9 @@ namespace TextRpg.Game_Object
     {
         public QueensFedora()
         {
+            this.price = 1000;
             this.plusHp = 1000;
+            this.equipment = true;
         }
     }
 
@@ -110,15 +153,27 @@ namespace TextRpg.Game_Object
     {
         public GoldRing()
         {
+            this.price = 500;
             this.plusHp = 500;
+            this.equipment = true;
         }
     }
     #endregion
 
     #region 파밍 아이템 (탐색 파밍)
-    public class GreenHerbs : Item { }
+    public class GreenHerbs : Item {
+        public GreenHerbs()
+        {
+            this.price = 40;
+        }
+    }
 
-    public class Mushrooms : Item { }
+    public class Mushrooms : Item {
+        public Mushrooms()
+        {
+            this.price = 30;
+        }
+    }
     #endregion
 
 
@@ -152,8 +207,10 @@ namespace TextRpg.Game_Object
     {
         public SimpleDagger()
         {
+            this.price = 100;
             this.attackPower = 30;
             this.needCombiItem = new string[2] { "무기 부품", "들개의 송곳니" };
+            this.equipment = true;
         }
     }
 
@@ -161,8 +218,10 @@ namespace TextRpg.Game_Object
     {
         public RedKnuckle()
         {
+            this.price = 200;
             this.attackPower = 50;
             this.needCombiItem = new string[3] { "무기 부품", "랫의 증표", "두꺼운 가죽" };
+            this.equipment = true;
         }
     }
 
