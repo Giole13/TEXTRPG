@@ -78,6 +78,7 @@ namespace TextRpg.Game_Object
             Item.allItem.Add("붉은 너클", new RedKnuckle());
             Item.allItem.Add("라이터", new Lighter());
             Item.allItem.Add("망가진 권총", new BrokenPistol());
+            Item.allItem.Add("권총", new Pistol());
 
 
 
@@ -90,6 +91,7 @@ namespace TextRpg.Game_Object
 
             Item.combiItem.Add("단단한 단검", new SimpleDagger());
             Item.combiItem.Add("붉은 너클", new RedKnuckle());
+            Item.combiItem.Add("권총", new Pistol());
 
 
         }
@@ -207,6 +209,8 @@ namespace TextRpg.Game_Object
         {
             this.plusHp = 100;
             this.price = 300;
+            this.equipment = true;
+
         }
     }
 
@@ -216,6 +220,8 @@ namespace TextRpg.Game_Object
         {
             this.plusHp = 200;
             this.price = 500;
+            this.equipment = true;
+
         }
     }
 
@@ -241,6 +247,17 @@ namespace TextRpg.Game_Object
             this.price = 200;
             this.attackPower = 50;
             this.needCombiItem = new string[3] { "무기 부품", "랫의 증표", "두꺼운 가죽" };
+            this.equipment = true;
+        }
+    }
+
+    public class Pistol : Item
+    {
+        public Pistol()
+        {
+            this.price = 500;
+            this.attackPower = 130;
+            this.needCombiItem = new string[3] { "무기 부품", "망가진 권총", "털 갈퀴" };
             this.equipment = true;
         }
     }

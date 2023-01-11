@@ -125,6 +125,27 @@ namespace TextRpg.In_Game_Scenes
                 case ConsoleKey.D2:
                     CombinationItem(2);
                     break;
+                case ConsoleKey.D3:
+                    CombinationItem(3);
+                    break;
+                case ConsoleKey.D4:
+                    CombinationItem(4);
+                    break;
+                case ConsoleKey.D5:
+                    CombinationItem(5);
+                    break;
+                case ConsoleKey.D6:
+                    CombinationItem(6);
+                    break;
+                case ConsoleKey.D7:
+                    CombinationItem(7);
+                    break;
+                case ConsoleKey.D8:
+                    CombinationItem(8);
+                    break;
+                case ConsoleKey.D9:
+                    CombinationItem(9);
+                    break;
                 case ConsoleKey.Escape:
                     backScene = false;
                     return;
@@ -138,6 +159,8 @@ namespace TextRpg.In_Game_Scenes
         private void CombinationItem(int num)
         {
             num = num - 1;
+            if(itemList[num] == null) { return; }
+            
             Item combiItem = itemList[num];
             string[] needItems = combiItem.needCombiItem;
 
@@ -207,6 +230,7 @@ namespace TextRpg.In_Game_Scenes
                     Task.Delay(1200).Wait();
                 }
             }
+            else { /*Do nothing*/}
         }
 
 

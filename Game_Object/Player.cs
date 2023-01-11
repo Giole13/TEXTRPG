@@ -184,6 +184,8 @@ namespace TextRpg.Game_Object
             foreach (string equipmentItem in equipment.Keys)
             {
                 Console.SetCursorPosition(0, 37);
+                Console.Write("         ");
+                Console.SetCursorPosition(0, 37);
                 Console.WriteLine("│ {0}", equipmentItem);
             }
             Console.SetCursorPosition(0, 38);
