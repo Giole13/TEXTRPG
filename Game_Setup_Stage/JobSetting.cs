@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using TextRpg.Game_Object;
 
 namespace TextRpg.Game_Setup_Stage
@@ -86,8 +87,8 @@ namespace TextRpg.Game_Setup_Stage
             Console.CursorVisible = false;
             Console.SetCursorPosition(90 / 2, 20);
             Console.WriteLine("당신의 직업은 {0} 입니다!         ", Player.GetPlayerJob());
-            Console.ReadKey(true);
-            Console.CursorVisible = true;
+            Task.Delay(1000).Wait();
+            //Console.CursorVisible = true;
         }
 
 

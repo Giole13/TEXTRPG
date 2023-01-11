@@ -94,26 +94,56 @@ namespace TextRpg.Game_Object
                 _needMaxExp = 20;
                 plsyerJob = new Ceo();
             }
-            else { /*Do nothing*/}
+            else { /*Do nothing*/ }
+        }
+
+        static public void IamGod()
+        {
+            _maxHp = 10000;
+            _presentHp = 10000;
+            _level = 100;
+            _attack = 1000;
+            _presentExp = 0;      //현재경험치
+            _needMaxExp = 0;
+            plsyerJob = new Ceo();
+            _name = "신";
+            _job = "신";
         }
 
         // 플레이어의 복합정보
         static public void PrintPlayerInfo()
         {
-            LevelupCheck();
             //─
             //＿
-            Console.WriteLine("플레이어 스탯 ────────────────────────────────────────────");
-            Console.WriteLine("이름\t: {0}\t\t직업\t: {1}", _name, _job);
-            Console.WriteLine("레벨\t: {0}\t\t공격력\t: {1}", _level, _attack);
-            Console.Write("돈: {0}\t\t", _money);
-            Console.Write("체력: {0} / {1}\t\t", _presentHp , _maxHp);
-            Console.Write("경험치: {0} / {1}\n", _presentExp, _needMaxExp);
+            //Textmanager.InventoryWindow();
+            Console.SetCursorPosition(0, 0);
+            LevelupCheck();
+            Console.SetCursorPosition(0, 29);
+            Console.Write("┌─  플레이어 스탯 ───────────────────────────────────────┐\n");
+            Console.Write("  이름\t: {0}\t\t직업\t: {1}\n", _name, _job);
+            Console.Write("  레벨\t: {0}\t\t공격력\t: {1}\n", _level, _attack);
+            Console.Write("  돈: {0}\t\t", _money);
+            Console.Write("  체력: {0} / {1}\n", _presentHp, _maxHp);
+            Console.Write("  경험치: {0} / {1}\n", _presentExp, _needMaxExp);
+            VerticalLine();
+
 
             //장비 슬릇 추가
+            //Console.SetCursorPosition(0,21);
             ShowEquipment();
-            //장비 체크해서 스탯 변경
-            Console.WriteLine("──────────────────────────────────────────────────────────");
+            Console.SetCursorPosition(2, 2);
+        }
+
+        static private void VerticalLine()
+        {
+            for (int i = 0; i < 6; ++i)
+            {
+                Console.SetCursorPosition(0, i + 30);
+                Console.Write("│");
+                Console.SetCursorPosition(57, i + 30);
+                Console.Write("│");
+            }
+
         }
 
         static public void GetOffEquipment(Item equipment)
@@ -127,7 +157,7 @@ namespace TextRpg.Game_Object
         {
             foreach (Item equipment in Player.equipment.Values)
             {
-                if(equipment.mountItem == false)
+                if (equipment.mountItem == false)
                 {
                     _maxHp += equipment.plusHp;
                     _attack += equipment.attackPower;
@@ -143,14 +173,21 @@ namespace TextRpg.Game_Object
 
         static private void ShowEquipment()
         {
-            Console.WriteLine("현재 장비한 아이템");
-
+            Console.SetCursorPosition(0, 36);
+            Console.WriteLine("│ 현재 장비한 아이템");
+            Console.SetCursorPosition(0, 37);
+            Console.WriteLine("│ =없음=");
+            Console.SetCursorPosition(57, 36);
+            Console.Write("│");
+            Console.SetCursorPosition(57, 37);
+            Console.Write("│");
             foreach (string equipmentItem in equipment.Keys)
             {
-                Console.WriteLine("{0}", equipmentItem);
-
+                Console.SetCursorPosition(0, 37);
+                Console.WriteLine("│ {0}", equipmentItem);
             }
-
+            Console.SetCursorPosition(0, 38);
+            Console.WriteLine("└────────────────────────────────────────────────────────┘");
 
         }
 
@@ -168,7 +205,10 @@ namespace TextRpg.Game_Object
                 _presentHp = _maxHp;
 
                 //커서는 조정
-                Console.WriteLine("레벨업!!!!!!!!!");
+                Console.Clear();
+                Console.SetCursorPosition(20, 20);
+                Console.WriteLine("레벨업■■■■■■■■■");
+                Task.Delay(2000).Wait();
             }
             else { /*Do nothing*/}
         }

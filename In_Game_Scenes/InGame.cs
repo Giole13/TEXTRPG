@@ -43,9 +43,8 @@ namespace TextRpg.In_Game_Scenes
                         new Store();
                         break;
                     case ConsoleKey.D4:
-                        new Combination();
                         //조합
-
+                        new Combination();
                         break;
                     case ConsoleKey.Escape:
                         //게임종료

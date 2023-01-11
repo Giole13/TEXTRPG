@@ -60,6 +60,14 @@ namespace TextRpg.In_Game_Scenes
         }
     }
 
+    public class God : Job
+    {
+        public God()
+        {
+            _name = "신";
+        }
+    }
+
 
 
     //스킬 구현
@@ -72,6 +80,7 @@ namespace TextRpg.In_Game_Scenes
 
         private void PlayerSkills(ref Monster monster)
         {
+            Textmanager.SetWindow();
             Console.WriteLine("{0} 이(가) 스킬을 사용했다!", Player.GetPlayerName());
             Job playerJob = Player.plsyerJob;
             switch (playerJob)
@@ -84,15 +93,18 @@ namespace TextRpg.In_Game_Scenes
                     {
                         Player._presentHp = Player._maxHp;
                     }
+                    Textmanager.SetWindow();
                     Console.WriteLine("{0} 만큼 치료 했다!", heal);
                     break;
                 case Soldier:
                     //군인인 경우
                     int damage = playerJob._jobSkill(Player._level);
                     monster.hp -= damage;
+                    Textmanager.SetWindow();
                     Console.WriteLine("{0} 만큼 데미지를 줬다!", damage);
                     break;
                 default:
+                    Textmanager.SetWindow();
                     Console.WriteLine("하지만 아무런 일도 일어나지 않았다.");
                     break;
             }

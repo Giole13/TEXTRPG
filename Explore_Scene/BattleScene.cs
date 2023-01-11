@@ -3,7 +3,7 @@ using TextRpg.Game_Object;
 
 namespace TextRpg.Explore_Scene
 {
-    // 전투 씬: 랜덤하게 몬스터, 보스를 등장시는 클래스
+    // 전투 씬: 랜덤하게 몬스터, 보스를 결정하는 클래스
     public class BattleScene
     {
         private int bossCount;
@@ -35,24 +35,11 @@ namespace TextRpg.Explore_Scene
         // 적을 찾는 함수
         public void SearchEnemey()
         {
-            Random randmonster = new Random();
-            //1부터 3까지 랜덤으로 몬스터 결정
-            int monserNum = randmonster.Next(1, 3 + 1);
+            MonsterSet mList = new MonsterSet();
 
-            switch (monserNum)
-            {
-                case 1:
-                    _MONSTER = new ArmedGroup();
-                    break;
-                case 2:
-                    _MONSTER = new WildDog();
-                    break;
-                case 3:
-                    _MONSTER = new RatsPawns();
-                    break;
-                default:
-                    break;
-            }
+            Random randmonster = new Random();
+            //랜덤으로 몬스터 결정
+            _MONSTER = mList.monsterList[randmonster.Next(0, mList.monsterList.Count)];
         }
     }
 }

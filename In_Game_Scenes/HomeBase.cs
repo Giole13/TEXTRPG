@@ -14,6 +14,10 @@ namespace TextRpg.In_Game_Scenes
         //기지에서 가고싶은 씬의 종류를 출력해 주는 함수
         public void PrintBase()
         {
+            Player.PrintPlayerInfo();
+            Textmanager.TitleWindow();
+            Textmanager.InventoryWindow();
+            Textmanager.EventInfo();
             Console.SetCursorPosition(15, 5);
             Console.Write("1. 탐색");
             Console.SetCursorPosition(30, 5);
@@ -25,15 +29,12 @@ namespace TextRpg.In_Game_Scenes
             Console.SetCursorPosition(15, 10);
             Console.WriteLine("ESC. 게임 종료");
 
-            Console.SetCursorPosition(0, 15);
-            Player.PrintPlayerInfo();
+            //Console.SetCursorPosition(0, 15);
         }
 
         //1~4까지 입력 받는 걸 반환하는 함수
         public ConsoleKeyInfo SelectScenes()
         {
-            Console.SetCursorPosition(80, 20);
-            Console.Write("입력 : ");
             ConsoleKeyInfo result = Console.ReadKey();
             return result;
         }

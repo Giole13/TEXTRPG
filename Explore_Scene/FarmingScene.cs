@@ -6,17 +6,16 @@ namespace TextRpg.Explore_Scene
 {
     public class FarmingScene
     {
+        int bossCount;
         //30퍼센트 확률로 아이템을 얻을수 있는 파밍 씬
-        public FarmingScene()
+        public FarmingScene(int num)
         {
+            bossCount = num;
             FarmingSceneProgress();
         }
 
         private void FarmingSceneProgress()
         {
-            Console.Clear();
-            Player.PrintPlayerInfo();
-            Console.WriteLine("====================");
             Random rand = new Random();
             List<string> itemList = new List<string>();
             //아이템 랜덤으로 하나 뽑아서 출력 (이건 파밍 템으로 가자)
@@ -26,6 +25,10 @@ namespace TextRpg.Explore_Scene
             }
 
             string farmingItem = itemList[rand.Next(0, 2)];
+            Textmanager.ExploreWindow();
+            //Textmanager.SetWindow();
+            Console.WriteLine("현재 탐색 횟수 : {0}", bossCount);
+            Textmanager.SetWindow();
             Console.WriteLine("{0} 아이템을 획득하였습니다!", farmingItem);
             Console.ReadKey();
             Item farmingItemclass = Item.farmingItem[farmingItem];

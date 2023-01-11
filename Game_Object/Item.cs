@@ -76,6 +76,8 @@ namespace TextRpg.Game_Object
             Item.allItem.Add("황금 반지", new GoldRing());
             Item.allItem.Add("단단한 단검", new SimpleDagger());
             Item.allItem.Add("붉은 너클", new RedKnuckle());
+            Item.allItem.Add("라이터", new Lighter());
+            Item.allItem.Add("망가진 권총", new BrokenPistol());
 
 
 
@@ -132,9 +134,27 @@ namespace TextRpg.Game_Object
     public class ThickLetter : Item {
         public ThickLetter()
         {
-            this.price = 50;
+            this.price = 60;
         }
     }
+
+    public class Lighter : Item
+    {
+        public Lighter()
+        {
+            this.price = 70;
+        }
+    }
+
+    public class BrokenPistol : Item
+    {
+        public BrokenPistol()
+        {
+            this.price = 200;
+        }
+    }
+
+
 
     #endregion 드랍아이템
 

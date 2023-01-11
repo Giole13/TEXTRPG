@@ -27,6 +27,25 @@ namespace TextRpg.Game_Setup_Stage
             //플레이어의 스탯 초기화
             Player.SetPlayerStat();
 
+            //몬스터 리스트 초기화
+
+            //아이템 딕셔너리 초기화
+            new SetItem();
+
+            //창고 딕셔너리 초기화
+            new WareHouseDic();
+        }
+    }
+
+
+    //디버그용 셋팅
+    public class Debug
+    {
+        public Debug()
+        {
+            //플레이어의 스탯 초기화
+            Player.SetPlayerStat();
+
             //아이템 딕셔너리 초기화
             new SetItem();
 

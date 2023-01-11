@@ -16,9 +16,10 @@ namespace TextRpg
             //Console.CursorVisible = true; //커서 보이게
             //Console.Title 제목 설정
             //해상도 130 * 38 사이즈
-            Console.SetWindowSize(130,38);
+            Console.SetWindowSize(130,39);
             Console.Title = "텍스트 RPG";
             Console.Clear();
+            Console.ForegroundColor= ConsoleColor.White;
             Console.WriteLine("\n\n\n\n");
             Console.WriteLine("\t\t\t'########:'########:'##::::'##:'########::::'########::'########:::'######:::");
             Console.WriteLine("\t\t\t... ##..:: ##.....::. ##::'##::... ##..::::: ##.... ##: ##.... ##:'##... ##::");
@@ -28,24 +29,7 @@ namespace TextRpg
             Console.WriteLine("\t\t\t::: ##:::: ##:::::::: ##:. ##::::: ##::::::: ##::. ##:: ##:::::::: ##::: ##::");
             Console.WriteLine("\t\t\t::: ##:::: ########: ##:::. ##:::: ##::::::: ##:::. ##: ##::::::::. ######:::");
             Console.WriteLine("\t\t\t:::..:::::........::..:::::..:::::..::::::::..:::::..::..::::::::::......::::");
-
-
-
-
-            //'########:'########:'##::::'##:'########::::'########::'########:::'######:::
-            //... ##..:: ##.....::. ##::'##::... ##..::::: ##.... ##: ##.... ##:'##... ##::
-            //::: ##:::: ##::::::::. ##'##:::::: ##::::::: ##:::: ##: ##:::: ##: ##:::..:::
-            //::: ##:::: ######:::::. ###::::::: ##::::::: ########:: ########:: ##::'####:
-            //::: ##:::: ##...:::::: ## ##:::::: ##::::::: ##.. ##::: ##.....::: ##::: ##::
-            //::: ##:::: ##:::::::: ##:. ##::::: ##::::::: ##::. ##:: ##:::::::: ##::: ##::
-            //::: ##:::: ########: ##:::. ##:::: ##::::::: ##:::. ##: ##::::::::. ######:::
-            //:::..:::::........::..:::::..:::::..::::::::..:::::..::..::::::::::......::::
-            //_ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ |
-            //    _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ |
-            //    _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ |
-            //    _ | _ | _ | _ | _ | _ | _ | _ | _ | _ |
-            //    _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ |
-
+            Console.ForegroundColor = ConsoleColor.Gray;
 
             Console.CursorVisible = false;
             AnyKey();
@@ -53,7 +37,6 @@ namespace TextRpg
             stopTitle = true;
             Task.Delay(1000).Wait();
             Console.CursorVisible = true;
-
         }
 
 
@@ -64,20 +47,26 @@ namespace TextRpg
             {
                 Console.SetCursorPosition(110/2, 20);
                 Console.Write("Press Any Key");
-                await Task.Delay(900);
+                await Task.Delay(1000);          //유지되는 기간
                 clearCurrentLine();
-                await Task.Delay(900);
+                await Task.Delay(500);          //사라졌을 때 기간
                 if (stopTitle) { break; }
             }
         }
 
-        private void clearCurrentLine()
+        private void clearCurrentLine()     //지웠다가 다시 써주는 함수
         {
             string s = "\r";
             s += new string(' ', Console.CursorLeft);
             s += "\r";
             Console.Write(s);
         }
+
+
+
+
+
+
 
     }
 }

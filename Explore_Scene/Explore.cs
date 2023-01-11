@@ -8,7 +8,7 @@ namespace TextRpg.Explore_Scene
     {
         ConsoleKeyInfo cki;
         //전 씬으로 돌아 가는 변수
-        private int bossCount = 0;
+        private int bossCount;
         public Explore()
         {
             ExploreProgress();
@@ -21,7 +21,9 @@ namespace TextRpg.Explore_Scene
             //탐색 씬은 돌아가기 전까지 반복한다.
             while (true)
             {
-                ExplorePrint();
+                Textmanager.ExploreWindow();
+                
+                ShowExplore();
                 cki = Console.ReadKey();
                 switch (cki.Key)
                 {
@@ -30,7 +32,7 @@ namespace TextRpg.Explore_Scene
                         //backScene에 bool 형으로 반환하기
                         RandomMoveScene();
                         break;
-                    case ConsoleKey.D2:
+                    case ConsoleKey.Escape:
                         //기지로 돌아가기
                         return;
                     default:
@@ -40,18 +42,17 @@ namespace TextRpg.Explore_Scene
         }
 
         //탐색씬 출력 함수
-        private void ExplorePrint()
+        
+
+        private void ShowExplore()
         {
-            Console.Clear();
-            Console.SetCursorPosition(0, 0);
-            Console.WriteLine("탐색");
-            Console.SetCursorPosition(0, 1);
-            Console.WriteLine("보스 출현까지 {0} 회 남았습니다.", 10 - bossCount);
-            Console.SetCursorPosition(0, 2);
-            Player.PrintPlayerInfo();
-            Console.WriteLine("====================");
-            Console.WriteLine("1 : 탐색하기\t2 : 돌아가기");
+            Console.WriteLine("현재 탐색 회수 : {0}",bossCount);
+            Console.SetCursorPosition(2, 27);
+            Console.WriteLine("1 탐색하기\tESC 돌아가기");
         }
+
+        
+
 
         //전투나 파밍으로 랜덤으로 보내주는 함수
         private void RandomMoveScene()
@@ -59,14 +60,15 @@ namespace TextRpg.Explore_Scene
             Random rand = new Random();
             //랜덤한 확률로 이동하는 방식
             int num = rand.Next(1, 100 + 1);
-            if (num > 30)
+            if (num > 30 || (bossCount%10 == 0))
             {   //70퍼센트 확률로 전투
                 new BattleScene(bossCount);
                 ++bossCount;
             }
             else
             {   //30퍼센트 확률로 파밍
-                new FarmingScene();
+                new FarmingScene(bossCount);
+                ++bossCount;
             }
 
         }

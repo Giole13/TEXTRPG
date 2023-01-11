@@ -45,10 +45,10 @@ namespace TextRpg.WareHouse_Scene
 
             while (true)
             {
+                Console.Clear();
                 PrintWareHouse();
+                //Console.WriteLine("1 : 장착하기\tESC : 돌아가기");
 
-                Console.WriteLine("1 : 장착하기\tESC : 돌아가기");
-                Console.Write("입력해주세요 : ");
 
                 cki = Console.ReadKey();
                 switch (cki.Key)
@@ -72,26 +72,25 @@ namespace TextRpg.WareHouse_Scene
 
 
 
-        #region 장착시퀀스
+        #region 장착 시퀀스
         //장비아이템 출력
         private void PrintEquipment()
         {
             Console.Clear();
-            //창고 전체를 출력
-            ShowEquipment();
-
-            Console.WriteLine("=========================");
-
-            //인벤토리 출력
-            new ShowInventory();
-
+            Textmanager.WareHouseWindow();
+            Textmanager.InventoryWindow();
             Player.PrintPlayerInfo();
+            ShowEquipment();
         }
 
         // 장비아이템만 출력함
         private void ShowEquipment()
         {
-            Console.WriteLine("창고");
+            Console.SetCursorPosition(2, 27);
+            Console.WriteLine("1 ~ 9 바꿀 장비 선택\tESC 뒤로가기");
+            Console.SetCursorPosition(2, 2);
+            Console.WriteLine("장비");
+            Textmanager.SetWindow();
             Console.WriteLine("개수\t아이템");
             int num = 0;
             itemname.Clear();
@@ -101,6 +100,8 @@ namespace TextRpg.WareHouse_Scene
                 if (items.equipment == true)
                 {
                     itemname.Add(value.Key);
+                    
+                    Textmanager.SetWindow();
                     Console.Write("{0}번 ", num + 1);
                     Console.Write("{0}\t", items.ReturnAllItemStack());
                     Console.WriteLine("{0}", value.Key);
@@ -115,9 +116,7 @@ namespace TextRpg.WareHouse_Scene
         private void SelectNum1()
         {
             PrintEquipment();
-
-            Console.WriteLine("1 ~9 : 아이템 선택\tESC : 돌아가기");
-            Console.Write("입력해주세요 : ");
+            
 
             cki = Console.ReadKey();
             switch (cki.Key)
@@ -164,7 +163,9 @@ namespace TextRpg.WareHouse_Scene
             //아이템 고를때 터지는 이슈 해결
             if (itemname.Count < num)
             {
-                Console.WriteLine("\n다시 선택해주세요");
+                Textmanager.EventInfo();
+                Console.SetCursorPosition(64, 30);
+                Console.WriteLine("다시 선택해주세요");
                 Console.ReadKey();
                 return;
             }
@@ -198,39 +199,42 @@ namespace TextRpg.WareHouse_Scene
                 WareHouseDic.wareHouse.Remove(itemname[num - 1]);
 
                 Player.CheckEquipment();
-
+                Textmanager.EventInfo();
+                Console.SetCursorPosition(64, 30);
                 Console.WriteLine("{0} 을(를) 장착하였습니다.", itemname[num - 1]);
                 Console.ReadKey();
             }
             else
             {
+                Textmanager.EventInfo();
+                Console.SetCursorPosition(64, 30);
                 Console.WriteLine("\n다시 선택해주세요");
                 Console.ReadKey();
                 return;
             }
         }
-
         #endregion
+
 
         #region 프린트 시퀀스
         private void PrintWareHouse()
         {
-            Console.Clear();
+            Textmanager.WareHouseWindow();
+            //인벤토리 출력
+            Textmanager.InventoryWindow();
+            Player.PrintPlayerInfo();
             //창고 전체를 출력
             ShowWareHouse();
-
-            Console.WriteLine("=========================");
-
-            //인벤토리 출력
-            new ShowInventory();
-
-            Player.PrintPlayerInfo();
         }
 
         private void ShowWareHouse()
         {
-            Console.WriteLine("창고");
+            Console.SetCursorPosition(2, 27);
+            Console.WriteLine("1 장비\tESC 돌아가기");
+            Console.SetCursorPosition(0, 2);
+            Textmanager.SetWindow();
             Console.WriteLine("개수\t아이템");
+            Textmanager.SetWindow();
             //int num = 0;
             foreach (var value in WareHouseDic.wareHouse)
             {
@@ -239,6 +243,7 @@ namespace TextRpg.WareHouse_Scene
                 //Console.Write("{0}번 ", num + 1);
                 Console.Write("{0}\t", items.ReturnAllItemStack());
                 Console.WriteLine("{0}", value.Key);
+                Textmanager.SetWindow();
 
                 //++num;
             }

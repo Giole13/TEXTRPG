@@ -25,17 +25,16 @@ namespace TextRpg.Explore_Scene
 
             while (true)
             {
-                Console.Clear();
-                Player.PrintPlayerInfo();    //플레이어 정보 프린트
-                Console.WriteLine("====================");
                 //여기에 보스전 띄우기
+                Textmanager.ExploreWindow();
                 boss.PrintEnemyInfo();
-                Console.WriteLine("====================");
+
+
                 PlayerTurn();
-                Console.ReadKey();
+                Console.ReadKey(true);
 
                 BossTurn();
-                Console.ReadKey();
+                Console.ReadKey(true);
 
                 if (boss.hp <= 0)
                 {
@@ -45,6 +44,7 @@ namespace TextRpg.Explore_Scene
                 }
                 else if (Player._presentHp < 0)
                 {
+                    Textmanager.SetWindow();
                     Console.WriteLine("당신은 죽었습니다.");
                     Environment.Exit(0);
                 }
@@ -66,8 +66,11 @@ namespace TextRpg.Explore_Scene
         //플레이어 턴
         private void PlayerTurn()
         {
-            Console.WriteLine("1. 공격\t2. 스킬");
-            ConsoleKeyInfo cki = Console.ReadKey();
+            //Textmanager.SetWindow();
+            Console.SetCursorPosition(2, 27);
+            Console.WriteLine("1 공격\t2 스킬");
+            Console.SetCursorPosition(0, 2);
+            ConsoleKeyInfo cki = Console.ReadKey(true);
             switch (cki.Key)
             {
                 case ConsoleKey.D1:
@@ -85,6 +88,7 @@ namespace TextRpg.Explore_Scene
 
         private void PlayerAttack()
         {
+            Textmanager.SetWindow();
             Console.WriteLine("{0} 이(가) {1}을(를) 공격했다!\n",
                 Player.GetPlayerName(), boss.GetMonsterName());
             boss.hp -= Player._attack;
@@ -94,6 +98,7 @@ namespace TextRpg.Explore_Scene
         //보스의 공격
         private void BossTurn()
         {
+            Textmanager.SetWindow();
             Console.WriteLine("{0} 이(가) {1}을(를) 공격했다!\n",
                  boss.GetMonsterName(), Player.GetPlayerName());
             Player._presentHp -= boss.attack;

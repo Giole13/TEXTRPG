@@ -15,7 +15,7 @@ namespace TextRpg.Explore_Scene
 
         public PlayerFightMonster(Monster monster, int bossCountValue)
         {
-            bossCount = 10 - bossCountValue;
+            bossCount = bossCountValue;
             _monster = monster;
             FightProgress();
         }
@@ -25,17 +25,16 @@ namespace TextRpg.Explore_Scene
         {
             while (true)
             {
-                Console.Clear();
-                Console.WriteLine("보스 출현까지 {0} 회 남았습니다.", bossCount);
                 Player.PrintPlayerInfo();    //플레이어 정보 프린트
-                Console.WriteLine("====================");
+                Textmanager.ExploreWindow();
                 _monster.PrintEnemyInfo();   //적 정보 프린트
-                Console.WriteLine("====================");
+                Console.SetCursorPosition(2, 2);
+                Console.WriteLine("현재 탐색 횟수 : {0}", bossCount);
 
                 bool back = PlayerTurn();                //플레이어 턴
                 if (back) { return; }
 
-                Console.ReadKey();
+                Console.ReadKey(true);
 
                 MonsterTurn();               //몬스터 턴
                 if (_monster.hp <= 0)
@@ -51,7 +50,7 @@ namespace TextRpg.Explore_Scene
                 }
 
 
-                Console.ReadKey();
+                Console.ReadKey(true);
             }
 
         }
@@ -59,8 +58,10 @@ namespace TextRpg.Explore_Scene
         //전투 함수
         private bool PlayerTurn()
         {
-            Console.WriteLine("1. 공격\t2. 스킬\t3. 도망");
-            ConsoleKeyInfo cki = Console.ReadKey();
+            Console.SetCursorPosition(2, 27);
+            Console.WriteLine("1 공격 2 스킬 ESC 도망");
+            Console.SetCursorPosition(0, 3);
+            ConsoleKeyInfo cki = Console.ReadKey(true);
 
             switch (cki.Key)
             {
@@ -70,7 +71,7 @@ namespace TextRpg.Explore_Scene
                 case ConsoleKey.D2:
                     new PlayerSkill(ref _monster);
                     break;
-                case ConsoleKey.D3:
+                case ConsoleKey.Escape:
                     return true;
                 default:
                     break;
@@ -80,6 +81,7 @@ namespace TextRpg.Explore_Scene
 
         private void PlayerAttack()
         {
+            Textmanager.SetWindow();
             Console.WriteLine("{0} 이(가) {1}을(를) 공격했다!\n",
                 Player.GetPlayerName(), _monster.GetMonsterName());
             _monster.hp -= Player._attack;
@@ -88,6 +90,7 @@ namespace TextRpg.Explore_Scene
 
         private void MonsterTurn()
         {
+            Textmanager.SetWindow();
             Console.WriteLine("{0} 이(가) {1}을(를) 공격했다!\n",
                  _monster.GetMonsterName(), Player.GetPlayerName());
             Player._presentHp -= _monster.attack;

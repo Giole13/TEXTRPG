@@ -20,7 +20,7 @@ namespace TextRpg.Explore_Scene
 
         public void WinResult()
         {
-
+            Textmanager.ExploreWindow();
             if (_monster.boss == true)
             {
                 foreach (string items in _monster.item)
@@ -31,19 +31,20 @@ namespace TextRpg.Explore_Scene
                 //경험치랑 돈 얻는 함수도 추가
                 AddExp(_monster);
                 AddMoney(_monster);
-
-                Player.PrintPlayerInfo();
-                Console.WriteLine("===================");
                 //몬스터 싸운 결과물 출력
                 Console.WriteLine("당신은 이겼습니다!");
+                Textmanager.SetWindow();
                 Console.WriteLine("{0}를 획득하였습니다!", _monster.item[0]);
+                Textmanager.SetWindow();
                 Console.WriteLine("{0}를 획득하였습니다!", _monster.item[1]);
+                Textmanager.SetWindow();
                 Console.WriteLine("{0}를 획득하였습니다!", _monster.item[2]);
-                Console.WriteLine("===================");
-                new ShowInventory();
+
+                //new ShowInventory();
                 Console.ReadKey();
             }
-            else {
+            else
+            {
                 monsterItem = _monster.RandomeItem();
                 Item item = Item.allItem[monsterItem];
                 AddItemInventory(item, monsterItem);
@@ -52,12 +53,12 @@ namespace TextRpg.Explore_Scene
                 AddMoney(_monster);
 
                 Player.PrintPlayerInfo();
-                Console.WriteLine("===================");
                 //몬스터 싸운 결과물 출력
                 Console.WriteLine("당신은 이겼습니다!");
+                Textmanager.SetWindow();
                 Console.WriteLine("{0}를 획득하였습니다!", monsterItem);
-                Console.WriteLine("===================");
-                new ShowInventory();
+                Textmanager.SetWindow();
+                Textmanager.InventoryWindow();
             }
 
 
@@ -84,7 +85,7 @@ namespace TextRpg.Explore_Scene
 
         private void AddExp(Monster _monster)
         {
-            Player._presentExp +=  _monster.ReturnExp();
+            Player._presentExp += _monster.ReturnExp();
 
         }
 

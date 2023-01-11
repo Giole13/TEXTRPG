@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using TextRpg.Game_Object;
 
 namespace TextRpg.Game_Setup_Stage
@@ -31,22 +32,22 @@ namespace TextRpg.Game_Setup_Stage
         public bool QuestionName()
         {
 
-            string answer = Console.ReadLine();
+            ConsoleKeyInfo cki = Console.ReadKey(true);
 
-            if (answer == "1")
+            if (cki.Key == ConsoleKey.D1)
             {
                 return true;
             }
             else
             {
-                while (answer != "1")
+                while (cki.Key != ConsoleKey.D1)
                 {
                     Console.Clear();
                     Console.SetCursorPosition(90 / 2, 20);
                     Console.Write("이름을 다시 설정해주세요 : ");
                     _name = Console.ReadLine();
                     NameAsk();
-                    answer = Console.ReadLine();
+                    cki = Console.ReadKey(true);
                 }
             }
 
@@ -70,7 +71,7 @@ namespace TextRpg.Game_Setup_Stage
             Console.CursorVisible = false;
             Console.SetCursorPosition(90 / 2, 20);
             Console.WriteLine("당신의 이름은 {0} 입니다!", _name);
-            Console.ReadKey();
+            Task.Delay(1000).Wait();
             Console.CursorVisible = true;
         }
     }
