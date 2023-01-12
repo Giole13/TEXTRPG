@@ -209,7 +209,7 @@ namespace TextRpg.Game_Object
             this.name = "무서운 사람";
             this.experienceValue = 800;       //경험치
             this.level = 9;
-            this.attack = 200;
+            this.attack = 300;
             this.item = new string[] { "귀여운 인형", "깜찍한 인형" };
             this.haveMoney = 1000;
         }
@@ -224,7 +224,7 @@ namespace TextRpg.Game_Object
             this.name = "빵 봉투 아저씨";
             this.experienceValue = 1000;       //경험치
             this.level = 23;
-            this.attack = 600;
+            this.attack = 500;
             this.item = new string[] { "무거운 대검", "우유", "권총" };
             this.haveMoney = 2000;
         }
@@ -256,7 +256,7 @@ namespace TextRpg.Game_Object
             this.name = "상여자";
             this.experienceValue = 1500;       //경험치
             this.level = 40;
-            this.attack = 500;
+            this.attack = 600;
             this.item = new string[] { "푸른 단검", "동전", "립스틱" };
             this.haveMoney = 4000;
         }
