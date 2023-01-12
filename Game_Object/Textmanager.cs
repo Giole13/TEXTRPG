@@ -106,7 +106,7 @@ namespace TextRpg.Game_Object
 
         #endregion
 
-        #region 타이틀 창
+        #region 기지 창
         static public void TitleWindow()
         {
             Player.PrintPlayerInfo();
@@ -116,10 +116,12 @@ namespace TextRpg.Game_Object
         static private void PrintTitle()
         {
             Console.SetCursorPosition(0, 1);
-            Console.Write("┌─  기지 ────────────────────────────────────────────────┐\n");
+            Console.Write("┌─  기지 ────────────────────┬───────────────────────────┐\n");
             TitleVerticalLine();
+            Console.SetCursorPosition(0, 15);
+            Console.WriteLine("├────────────────────────────┼───────────────────────────┤");
             Console.SetCursorPosition(0, 28);
-            Console.WriteLine("└────────────────────────────────────────────────────────┘");
+            Console.WriteLine("└────────────────────────────┴───────────────────────────┘");
             Console.SetCursorPosition(2, 2);
         }
         static private void TitleVerticalLine()
@@ -129,6 +131,8 @@ namespace TextRpg.Game_Object
                 Console.SetCursorPosition(0, i + 2);
                 Console.Write("│");
                 Console.SetCursorPosition(57, i + 2);
+                Console.Write("│");
+                Console.SetCursorPosition(29, i + 2);
                 Console.Write("│");
             }
         }
@@ -169,6 +173,14 @@ namespace TextRpg.Game_Object
         static public void StoreWindow()
         {
             WareHouseWindow();
+            int num = 0;
+            foreach (string name in WareHouseDic.wareHouse.Keys)
+            {
+                Console.Write("{0}번 ", num + 1);
+                Console.WriteLine("{0}", name);
+                Textmanager.SetWindow();
+                ++num;
+            }
             Player.PrintPlayerInfo();
             PrintStore();
             EventInfo();
@@ -218,9 +230,6 @@ namespace TextRpg.Game_Object
 
             Console.SetCursorPosition(2, 2);
         }
-
-
-
         static private void EventVerticalLine()
         {
             for (int i = 0; i < 8; ++i)
@@ -265,6 +274,40 @@ namespace TextRpg.Game_Object
         }
 
 
+        #endregion
+
+        #region 팝업 창
+        static public void PopupInfo()
+        {
+            Console.SetCursorPosition(35, 13);
+            Console.Write("┌─  알림 ─────────────────────────────────────────┐\n");
+            PopupVerticalLine();
+            Console.SetCursorPosition(35, 21);
+            Console.WriteLine("└─────────────────────────────────────────────────┘");
+
+            //63 수평 -> 118
+            //30 수직 -> 37
+            for (int y = 14; y <= 20; ++y)
+            {
+                for (int x = 36; x <= 84; ++x)
+                {
+                    Console.SetCursorPosition(x, y);  //지우기
+                    Console.Write(" ");
+                }
+            }
+
+            Console.SetCursorPosition(2, 2);
+        }
+        static private void PopupVerticalLine()
+        {
+            for (int i = 0; i < 7; ++i)
+            {
+                Console.SetCursorPosition(35, i + 14);
+                Console.Write("│");
+                Console.SetCursorPosition(85, i + 14);
+                Console.Write("│");
+            }
+        }
         #endregion
     }
 }

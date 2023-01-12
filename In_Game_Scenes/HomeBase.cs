@@ -18,16 +18,25 @@ namespace TextRpg.In_Game_Scenes
             Textmanager.TitleWindow();
             Textmanager.InventoryWindow();
             Textmanager.EventInfo();
-            Console.SetCursorPosition(15, 5);
-            Console.Write("1. 탐색");
-            Console.SetCursorPosition(30, 5);
-            Console.Write("2. 창고");
-            Console.SetCursorPosition(15, 8);
-            Console.Write("3. 상점");
-            Console.SetCursorPosition(30, 8);
-            Console.Write("4. 조합");
-            Console.SetCursorPosition(15, 10);
-            Console.WriteLine("ESC. 게임 종료");
+            Console.SetCursorPosition(2, 2);
+            Console.Write("1 탐색");
+            Console.SetCursorPosition(2, 4);
+            Console.WriteLine("전투 및 파밍");
+            Console.SetCursorPosition(31, 2);
+            Console.Write("2 창고");
+            Console.SetCursorPosition(31, 4);
+            Console.WriteLine("장비 아이템 장착");
+            Console.SetCursorPosition(2, 16);
+            Console.Write("3 상점");
+            Console.SetCursorPosition(2, 18);
+            Console.WriteLine("아이템 구입 및 판매");
+            Console.SetCursorPosition(31, 16);
+            Console.Write("4 조합");
+            Console.SetCursorPosition(31, 18);
+            Console.WriteLine("아이템 조합");
+
+            //Console.SetCursorPosition(15, 10);
+            //Console.WriteLine("ESC. 게임 종료");
 
             //Console.SetCursorPosition(0, 15);
         }
@@ -35,7 +44,7 @@ namespace TextRpg.In_Game_Scenes
         //1~4까지 입력 받는 걸 반환하는 함수
         public ConsoleKeyInfo SelectScenes()
         {
-            ConsoleKeyInfo result = Console.ReadKey();
+            ConsoleKeyInfo result = Console.ReadKey(true);
             return result;
         }
 

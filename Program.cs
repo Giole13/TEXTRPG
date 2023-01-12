@@ -11,20 +11,17 @@ namespace TextRpg
 
         static void Main(string[] args)
         {
-            // 게임 초기 설정
-            // 플레이어 이름, 직업 설정
-            //디버그
+            //디버그 모드
             //new Debug();
-            //Console.SetWindowSize(130, 39);
+            //Console.SetWindowSize(121, 39);
             //Player.IamGod();
+            //new Title();
 
-
-
+            //정상적인 게임 초기 설정
             new SetGame();
+
             //인게임 진행
             InGame inGame = new InGame();
-
-
         }
     }
 }

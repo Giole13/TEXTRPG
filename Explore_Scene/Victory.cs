@@ -7,7 +7,6 @@ namespace TextRpg.Explore_Scene
     {
         Monster _monster;
         string monsterItem;
-        string[] monsterItems;
 
 
         public Victory(Monster monster)
@@ -15,7 +14,7 @@ namespace TextRpg.Explore_Scene
             Console.Clear();
             _monster = monster;
             WinResult();
-            Console.ReadKey();
+            Console.ReadKey(true);
         }
 
         public void WinResult()
@@ -23,25 +22,29 @@ namespace TextRpg.Explore_Scene
             Textmanager.ExploreWindow();
             if (_monster.boss == true)
             {
-                foreach (string items in _monster.item)
-                {
-                    Item item = Item.allItem[items];
-                    AddItemInventory(item, items);
-                }
                 //경험치랑 돈 얻는 함수도 추가
                 AddExp(_monster);
                 AddMoney(_monster);
                 //몬스터 싸운 결과물 출력
+                Player.PrintPlayerInfo();
+                Textmanager.ExploreWindow();
+
                 Console.WriteLine("당신은 이겼습니다!");
-                Textmanager.SetWindow();
-                Console.WriteLine("{0}를 획득하였습니다!", _monster.item[0]);
-                Textmanager.SetWindow();
-                Console.WriteLine("{0}를 획득하였습니다!", _monster.item[1]);
-                Textmanager.SetWindow();
-                Console.WriteLine("{0}를 획득하였습니다!", _monster.item[2]);
+                foreach (string items in _monster.item)
+                {
+                    Item item = Item.allItem[items];
+                    AddItemInventory(item, items);
+                    Textmanager.SetWindow();
+                    Console.WriteLine("{0}를 획득하였습니다!", items);
+                }
+
+                //Textmanager.SetWindow();
+                //Console.WriteLine("{0}를 획득하였습니다!", _monster.item[1]);
+                //Textmanager.SetWindow();
+                //Console.WriteLine("{0}를 획득하였습니다!", _monster.item[2]);
 
                 //new ShowInventory();
-                Console.ReadKey();
+                Console.ReadKey(true);
             }
             else
             {
@@ -53,12 +56,13 @@ namespace TextRpg.Explore_Scene
                 AddMoney(_monster);
 
                 Player.PrintPlayerInfo();
+                Textmanager.ExploreWindow();
                 //몬스터 싸운 결과물 출력
                 Console.WriteLine("당신은 이겼습니다!");
                 Textmanager.SetWindow();
                 Console.WriteLine("{0}를 획득하였습니다!", monsterItem);
                 Textmanager.SetWindow();
-                Textmanager.InventoryWindow();
+                //Textmanager.InventoryWindow();
             }
 
 

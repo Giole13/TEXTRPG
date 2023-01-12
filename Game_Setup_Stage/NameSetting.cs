@@ -68,11 +68,9 @@ namespace TextRpg.Game_Setup_Stage
         public void NameOutput()
         {
             Console.Clear();
-            Console.CursorVisible = false;
             Console.SetCursorPosition(90 / 2, 20);
             Console.WriteLine("당신의 이름은 {0} 입니다!", _name);
             Task.Delay(1000).Wait();
-            Console.CursorVisible = true;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TextRpg.Game_Object;
 
 namespace TextRpg.WareHouse_Scene
@@ -50,7 +51,7 @@ namespace TextRpg.WareHouse_Scene
                 //Console.WriteLine("1 : 장착하기\tESC : 돌아가기");
 
 
-                cki = Console.ReadKey();
+                cki = Console.ReadKey(true);
                 switch (cki.Key)
                 {
                     case ConsoleKey.D1:
@@ -118,7 +119,7 @@ namespace TextRpg.WareHouse_Scene
             PrintEquipment();
             
 
-            cki = Console.ReadKey();
+            cki = Console.ReadKey(true);
             switch (cki.Key)
             {
                 //장비나 인벤토리로 옮기기
@@ -166,7 +167,7 @@ namespace TextRpg.WareHouse_Scene
                 Textmanager.EventInfo();
                 Console.SetCursorPosition(64, 30);
                 Console.WriteLine("다시 선택해주세요");
-                Console.ReadKey();
+                Console.ReadKey(true);
                 return;
             }
 
@@ -202,14 +203,14 @@ namespace TextRpg.WareHouse_Scene
                 Textmanager.EventInfo();
                 Console.SetCursorPosition(64, 30);
                 Console.WriteLine("{0} 을(를) 장착하였습니다.", itemname[num - 1]);
-                Console.ReadKey();
+                Task.Delay(1000).Wait();
             }
             else
             {
                 Textmanager.EventInfo();
                 Console.SetCursorPosition(64, 30);
                 Console.WriteLine("\n다시 선택해주세요");
-                Console.ReadKey();
+                Task.Delay(1000).Wait();
                 return;
             }
         }

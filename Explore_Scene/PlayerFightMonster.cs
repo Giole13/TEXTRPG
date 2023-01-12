@@ -45,7 +45,12 @@ namespace TextRpg.Explore_Scene
                 }
                 else if (Player._presentHp < 0)
                 {
-                    Console.WriteLine("당신은 죽었습니다.");
+                    Console.SetCursorPosition(0, 2);  //왼쪽위
+                    Console.Write("ㅇ");
+                    Textmanager.PopupInfo();
+                    Console.SetCursorPosition(55, 17);  //왼쪽위
+                    Console.WriteLine("- 사 망 -");
+                    Console.SetCursorPosition(0, 0);  //왼쪽위
                     Environment.Exit(0);
                 }
 
@@ -55,6 +60,8 @@ namespace TextRpg.Explore_Scene
 
         }
 
+
+        public int skillCnt = 3;
         //전투 함수
         private bool PlayerTurn()
         {
@@ -69,7 +76,7 @@ namespace TextRpg.Explore_Scene
                     PlayerAttack();
                     break;
                 case ConsoleKey.D2:
-                    new PlayerSkill(ref _monster);
+                    new PlayerSkill(ref _monster, ref skillCnt);
                     break;
                 case ConsoleKey.Escape:
                     return true;

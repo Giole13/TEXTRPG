@@ -18,18 +18,16 @@ namespace TextRpg.Explore_Scene
         // 전투 씬에서의 전체 흐름
         public void BattleSystem()
         {
-            if (bossCount == 10)    //10번 전투 달성시 랫의 여왕 등장
+            if (bossCount != 0 && bossCount % 10 == 0)    //10번 전투마다 보스 등장
             {
                 //boss배틀
                 new PlayerFightBoss(bossCount);
             }
-            else { /*Do noting*/}
-
-            SearchEnemey();     //적 설정
-            //적과 배틀
-            new PlayerFightMonster(_MONSTER, bossCount);
-            
-
+            else
+            {
+                SearchEnemey();     //적 설정
+                new PlayerFightMonster(_MONSTER, bossCount);
+            }
         }
 
         // 적을 찾는 함수

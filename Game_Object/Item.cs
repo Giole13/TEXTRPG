@@ -79,20 +79,46 @@ namespace TextRpg.Game_Object
             Item.allItem.Add("라이터", new Lighter());
             Item.allItem.Add("망가진 권총", new BrokenPistol());
             Item.allItem.Add("권총", new Pistol());
+            Item.allItem.Add("푸른 단검", new BlueKnife());
+            Item.allItem.Add("랫여왕의 세트", new QueensSet());
+            Item.allItem.Add("귀여운 인형", new CuteDoll());
+            Item.allItem.Add("깜찍한 인형", new CuteDoll());
+            Item.allItem.Add("석궁", new CrossBow());
+            Item.allItem.Add("깜직하고 귀여운 석궁", new CuteCrossBow());
+            Item.allItem.Add("무거운 대검", new HeavySword());
+            Item.allItem.Add("우유", new Milk());
+            Item.allItem.Add("껌", new Gum());
+            Item.allItem.Add("우유와 껌이 나가는 총", new GumMilkGun());
+            Item.allItem.Add("황금 지팡이", new GoldStick());
+            Item.allItem.Add("망치", new Hammer());
+            Item.allItem.Add("수박", new WaterMelon());
+            Item.allItem.Add("동전", new Tokken());
+            Item.allItem.Add("그래픽 카드", new GraphcCard());
+            Item.allItem.Add("립스틱", new Lipstick());
 
 
 
             //이하 용도별 아이템 딕셔너리
             Item.farmingItem.Add("푸른 약초", new GreenHerbs());
             Item.farmingItem.Add("수상한 버섯", new Mushrooms());
+            Item.farmingItem.Add("껌", new Gum());
 
             Item.equipmentItem.Add("모자", new Hat1());
             Item.equipmentItem.Add("가죽바지", new leatherpants());
+            Item.equipmentItem.Add("석궁", new CrossBow());
+            Item.equipmentItem.Add("망치", new Hammer());
+            Item.equipmentItem.Add("황금 지팡이", new GoldStick());
+            Item.equipmentItem.Add("수박", new WaterMelon());
 
             Item.combiItem.Add("단단한 단검", new SimpleDagger());
             Item.combiItem.Add("붉은 너클", new RedKnuckle());
+            Item.combiItem.Add("푸른 단검", new BlueKnife());
+            Item.combiItem.Add("랫여왕의 세트", new QueensSet());
             Item.combiItem.Add("권총", new Pistol());
+            Item.combiItem.Add("깜직하고 귀여운 석궁", new CuteCrossBow());
+            Item.combiItem.Add("우유와 껌이 나가는 총", new GumMilkGun());
 
+            
 
         }
 
@@ -180,6 +206,60 @@ namespace TextRpg.Game_Object
             this.equipment = true;
         }
     }
+    public class CuteDoll : Item
+    {
+        public CuteDoll()
+        {
+            this.price = 800;
+        }
+    }
+    public class CuteDoll2 : Item
+    {
+        public CuteDoll2()
+        {
+            this.price = 800;
+        }
+    }
+    public class HeavySword : Item
+    {
+        public HeavySword()
+        {
+            this.price = 800;
+            this.attackPower = 900;
+            this.equipment = true;
+        }
+    }
+    public class Milk : Item
+    {
+        public Milk()
+        {
+            this.price = 3000;
+        }
+    }
+
+    public class Tokken : Item
+    {
+        public Tokken()
+        {
+            this.price = 2000;
+        }
+    }
+    public class GraphcCard : Item
+    {
+        public GraphcCard()
+        {
+            this.price = 5000;
+        }
+    }
+    public class Lipstick : Item
+    {
+        public Lipstick()
+        {
+            this.price = 5000;
+        }
+    }
+
+
     #endregion
 
     #region 파밍 아이템 (탐색 파밍)
@@ -193,13 +273,18 @@ namespace TextRpg.Game_Object
     public class Mushrooms : Item {
         public Mushrooms()
         {
-            this.price = 30;
+            this.price = 100;
+        }
+    }
+
+    public class Gum : Item
+    {
+        public Gum()
+        {
+            this.price = 80;
         }
     }
     #endregion
-
-
-
 
     #region 장비아이템 상점 전용
     public class Hat1 : Item
@@ -210,10 +295,8 @@ namespace TextRpg.Game_Object
             this.plusHp = 100;
             this.price = 300;
             this.equipment = true;
-
         }
     }
-
     public class leatherpants : Item
     {
         public leatherpants()
@@ -221,9 +304,44 @@ namespace TextRpg.Game_Object
             this.plusHp = 200;
             this.price = 500;
             this.equipment = true;
-
         }
     }
+    public class CrossBow : Item
+    {
+        public CrossBow()
+        {
+            this.attackPower = 200;
+            this.price = 1500;
+            this.equipment = true;
+        }
+    }
+    public class Hammer : Item
+    {
+        public Hammer()
+        {
+            this.attackPower = 1500;
+            this.price = 5000;
+            this.equipment = true;
+        }
+    }
+    public class WaterMelon : Item
+    {
+        public WaterMelon()
+        {
+            this.price = 8000;
+        }
+    }
+
+    public class GoldStick : Item
+    {
+        public GoldStick()
+        {
+            this.attackPower = 10000;
+            this.price = 95000;
+            this.equipment = true;
+        }
+    }
+
 
 
     #endregion
@@ -262,6 +380,50 @@ namespace TextRpg.Game_Object
         }
     }
 
+    public class BlueKnife : Item
+    {
+        public BlueKnife()
+        {
+            this.price = 400;
+            this.attackPower = 500;
+            this.needCombiItem = new string[3] { "단단한 단검", "푸른 약초", "라이터" };
+            this.equipment = true;
+        }
+    }
+
+    public class QueensSet : Item
+    {
+        public QueensSet()
+        {
+            this.price = 1500;
+            this.attackPower = 900;
+            this.plusHp = 1000;
+            this.needCombiItem = new string[3] { "여왕의 페도라", "푸른 단검", "황금 반지" };
+            this.equipment = true;
+        }
+    }
+
+    public class CuteCrossBow : Item
+    {
+        public CuteCrossBow()
+        {
+            this.price = 1800;
+            this.attackPower = 1500;
+            this.needCombiItem = new string[3] { "귀여운 인형", "깜직한 인형", "석궁" };
+            this.equipment = true;
+        }
+    }
+
+    public class GumMilkGun : Item
+    {
+        public GumMilkGun()
+        {
+            this.price = 2800;
+            this.attackPower = 1400;
+            this.needCombiItem = new string[3] { "껌", "우유", "권총" };
+            this.equipment = true;
+        }
+    }
 
     #endregion
 

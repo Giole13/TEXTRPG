@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TextRpg.Game_Object;
 using TextRpg.WareHouse_Scene;
 
@@ -12,7 +13,7 @@ namespace TextRpg.Store_Scene
         int[] itemNum = new int[10];
         int[] itemPrice = new int[10];
         Item[] itemList = new Item[10];
-        ConsoleKeyInfo cki;
+
         bool backScene = true;
 
         List<string> sellItem = new List<string>();
@@ -30,7 +31,16 @@ namespace TextRpg.Store_Scene
                 Console.Clear();
                 Textmanager.StoreWindow();
                 BuyAndSell();
-                Textmanager.WareHouseWindow();
+                //Textmanager.WareHouseWindow();
+                int num = 0;
+                foreach (string name in WareHouseDic.wareHouse.Keys)
+                {
+                    Console.Write("{0}번 ", num + 1);
+                    sellItem.Add(name);
+                    Console.WriteLine("{0}", name);
+                    Textmanager.SetWindow();
+                    ++num;
+                }
             }
         }       //storeProgress(); 상점 메인 함수
 
@@ -43,7 +53,7 @@ namespace TextRpg.Store_Scene
             Console.SetCursorPosition(64, 27);
             Console.WriteLine("1 물건 구입\t2 물건 판매\tESC 돌아가기");
             Console.SetCursorPosition(64, 2);
-            cki2 = Console.ReadKey();
+            cki2 = Console.ReadKey(true);
             switch (cki2.Key)
             {
                 case ConsoleKey.D1:
@@ -89,50 +99,50 @@ namespace TextRpg.Store_Scene
 
         private void SelectSellItem()
         {
-            
-
-                Textmanager.EventInfo();
-                Console.SetCursorPosition(64, 30);
-                Console.WriteLine("판매할 아이템을 골라주세요");
 
 
-                ConsoleKeyInfo cki = Console.ReadKey(true);
-                switch (cki.Key)
-                {
-                    case ConsoleKey.D1:
-                        SellItems(1);
-                        break;
-                    case ConsoleKey.D2:
-                        SellItems(2);
-                        break;
-                    case ConsoleKey.D3:
-                        SellItems(3);
-                        break;
-                    case ConsoleKey.D4:
-                        SellItems(4);
-                        break;
-                    case ConsoleKey.D5:
-                        SellItems(5);
-                        break;
-                    case ConsoleKey.D6:
-                        SellItems(6);
-                        break;
-                    case ConsoleKey.D7:
-                        SellItems(7);
-                        break;
-                    case ConsoleKey.D8:
-                        SellItems(8);
-                        break;
-                    case ConsoleKey.D9:
-                        SellItems(9);
-                        break;
-                    case ConsoleKey.Escape:
-                        //돌아가기
-                        return;
-                    default:
-                        break;
-                }
-            
+            Textmanager.EventInfo();
+            Console.SetCursorPosition(64, 30);
+            Console.WriteLine("판매할 아이템을 골라주세요");
+
+
+            ConsoleKeyInfo cki = Console.ReadKey(true);
+            switch (cki.Key)
+            {
+                case ConsoleKey.D1:
+                    SellItems(1);
+                    break;
+                case ConsoleKey.D2:
+                    SellItems(2);
+                    break;
+                case ConsoleKey.D3:
+                    SellItems(3);
+                    break;
+                case ConsoleKey.D4:
+                    SellItems(4);
+                    break;
+                case ConsoleKey.D5:
+                    SellItems(5);
+                    break;
+                case ConsoleKey.D6:
+                    SellItems(6);
+                    break;
+                case ConsoleKey.D7:
+                    SellItems(7);
+                    break;
+                case ConsoleKey.D8:
+                    SellItems(8);
+                    break;
+                case ConsoleKey.D9:
+                    SellItems(9);
+                    break;
+                case ConsoleKey.Escape:
+                    //돌아가기
+                    return;
+                default:
+                    break;
+            }
+
         }
 
         private void SellItems(int num)
@@ -142,7 +152,7 @@ namespace TextRpg.Store_Scene
                 Textmanager.EventInfo();
                 Console.SetCursorPosition(64, 30);
                 Console.WriteLine("다시 선택해주세요");
-                Console.ReadKey();
+                Console.ReadKey(true);
                 return;
             }
             Console.SetCursorPosition(64, 30);
@@ -150,7 +160,7 @@ namespace TextRpg.Store_Scene
             Console.SetCursorPosition(64, 37);
             Console.WriteLine("1 판매\t2 취소");
             ConsoleKeyInfo cki;
-            cki = Console.ReadKey();
+            cki = Console.ReadKey(true);
             switch (cki.Key)
             {
                 case ConsoleKey.D1:
@@ -173,7 +183,7 @@ namespace TextRpg.Store_Scene
             Console.WriteLine("{0} 아이템을 판매하였습니다!", sellItem[num - 1]);
             Textmanager.SetinventoryWindow();
             Console.WriteLine("아이템을 판매하고 {0} 만큼 받았습니다!", sellitem.price);
-            Console.ReadKey(true);
+            Task.Delay(1000).Wait();
         }
 
 
@@ -194,7 +204,17 @@ namespace TextRpg.Store_Scene
                 Console.Write("{0} ", itemNum[i]);
                 Console.Write("{0}\n", itemName[i]);
                 Textmanager.SetinventoryWindow();
-                Console.Write("가격 : {0}\t", items.price);
+
+                if (Player.GetPlayerJob() == "CEO")
+                {
+                    Console.Write("가격 : {0}\t", items.price / 2);
+                }
+                else
+                {
+                    Console.Write("가격 : {0}\t", items.price);
+                }
+
+
                 if (items.plusHp != 0)
                 {
                     Console.Write("체력 + {0}", items.plusHp);
@@ -267,7 +287,7 @@ namespace TextRpg.Store_Scene
             {
                 Console.SetCursorPosition(62, 30);
                 Console.WriteLine("\n다시 선택해주세요");
-                Console.ReadKey();
+                Console.ReadKey(true);
                 return;
             }
             Console.SetCursorPosition(64, 30);
@@ -291,45 +311,61 @@ namespace TextRpg.Store_Scene
         private void BuyResult(int num)
         {
             Textmanager.EventInfo();
-            if (Player._money < itemPrice[num - 1])
+            if (Player.GetPlayerJob() == "CEO")
+            {
+                if (Player._money < itemPrice[num - 1] / 2)
+                {
+                    Console.SetCursorPosition(64, 30);
+                    Console.WriteLine("돈이 부족합니다!");
+                    Console.ReadKey(true);
+                    return;
+                }
+            }
+            else if (Player._money < itemPrice[num - 1])
             {
                 Console.SetCursorPosition(64, 30);
                 Console.WriteLine("돈이 부족합니다!");
-                Console.ReadKey();
+                Console.ReadKey(true);
+                return;
             }
-            else
+            else { /*Do nothing*/}
+
+
+            string itemNames = itemName[num - 1];
+            Item items = itemList[num - 1];
+            //플레이어의 인벤토리에 같은 아이템이 있다면 해당 아이템의 개수를 하나 증가
+            if (Player.inventory.ContainsKey(itemNames))
             {
-                string itemNames = itemName[num - 1];
-                Item items = itemList[num - 1];
-                //플레이어의 인벤토리에 같은 아이템이 있다면 해당 아이템의 개수를 하나 증가
-                if (Player.inventory.ContainsKey(itemNames))
+                //사장일 경우 반값 할인
+                if (Player.GetPlayerJob() == "CEO")
                 {
-                    //사장일 경우 반값 할인
-                    if (Player.GetPlayerJob() == "CEO")
-                    {
-                        Player._money -= itemPrice[num - 1] / 2;
-                        items.ItemStackPlus();
-                    }
-                    else { /*Do nothing*/}
-                    Player._money -= itemPrice[num - 1];
+                    Player._money -= itemPrice[num - 1] / 2;
                     items.ItemStackPlus();
                 }
                 else
                 {
-                    if (Player.GetPlayerJob() == "CEO")
-                    {
-                        Player._money -= itemPrice[num - 1] / 2;
-                        Player.inventory.Add(itemName[num - 1], itemList[num - 1]);
-                    }
-                    else { /*Do nothing*/}
+                    Player._money -= itemPrice[num - 1];
+                    items.ItemStackPlus();
+                }
+            }
+            else  //그게 아니라면 그냥 추가
+            {
+                if (Player.GetPlayerJob() == "CEO")
+                {
+                    Player._money -= itemPrice[num - 1] / 2;
+                    Player.inventory.Add(itemName[num - 1], itemList[num - 1]);
+                }
+                else
+                {
                     Player._money -= itemPrice[num - 1];
                     Player.inventory.Add(itemName[num - 1], itemList[num - 1]);
                 }
-                Textmanager.EventInfo();
-                Console.SetCursorPosition(64, 30);
-                Console.WriteLine("{0} 아이템을 구입하였습니다!", itemName[num - 1]);
-                Console.ReadKey(true);
             }
+            Textmanager.EventInfo();
+            Console.SetCursorPosition(64, 30);
+            Console.WriteLine("{0} 아이템을 구입하였습니다!", itemName[num - 1]);
+            Task.Delay(1000).Wait();
+
 
         }
         #endregion

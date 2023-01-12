@@ -60,6 +60,7 @@ namespace TextRpg.In_Game_Scenes
             Console.SetCursorPosition(64, 2);
             foreach (KeyValuePair<string, Item> item in Item.combiItem)
             {
+
                 Item items = item.Value;
                 itemNum[i] = i + 1;
                 itemName[i] = item.Key;
@@ -89,9 +90,11 @@ namespace TextRpg.In_Game_Scenes
                 Console.Write("{0}번 ", itemNum[i]);      //번호
                 Console.Write("{0}\n", itemName[i]);    //아이템 이름
                 NeedCombiItemShow(items);
+                
                 ++i;
                 //글자색을 원래대로 돌려놓기
                 Console.ForegroundColor = ConsoleColor.Gray;
+                
             }
         }
 
@@ -110,13 +113,14 @@ namespace TextRpg.In_Game_Scenes
                 i = 1;
             }
             Console.WriteLine();
+            Console.WriteLine();
             Textmanager.SetinventoryWindow();
         }
 
         //조합 아이템 선택
         private void SelectCombi()
         {
-            cki = Console.ReadKey();
+            cki = Console.ReadKey(true);
             switch (cki.Key)
             {
                 case ConsoleKey.D1:

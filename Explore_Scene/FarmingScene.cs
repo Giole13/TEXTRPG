@@ -24,13 +24,13 @@ namespace TextRpg.Explore_Scene
                 itemList.Add(item);
             }
 
-            string farmingItem = itemList[rand.Next(0, 2)];
+            string farmingItem = itemList[rand.Next(0, itemList.Count)];
             Textmanager.ExploreWindow();
             //Textmanager.SetWindow();
             Console.WriteLine("현재 탐색 횟수 : {0}", bossCount);
             Textmanager.SetWindow();
             Console.WriteLine("{0} 아이템을 획득하였습니다!", farmingItem);
-            Console.ReadKey();
+            Console.ReadKey(true);
             Item farmingItemclass = Item.farmingItem[farmingItem];
 
             if (Player.inventory.ContainsKey(farmingItem))

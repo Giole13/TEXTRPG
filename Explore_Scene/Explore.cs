@@ -24,7 +24,7 @@ namespace TextRpg.Explore_Scene
                 Textmanager.ExploreWindow();
                 
                 ShowExplore();
-                cki = Console.ReadKey();
+                cki = Console.ReadKey(true);
                 switch (cki.Key)
                 {
                     case ConsoleKey.D1:

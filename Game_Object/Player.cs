@@ -21,8 +21,6 @@ namespace TextRpg.Game_Object
         static public int _needMaxExp;      //레벨업에 필요한 경험치
         static public int _money;           //가진 돈
         static public Job plsyerJob;
-        static private int plusAttackPower;
-        static private int plusHp;
 
 
         static public Dictionary<string, Item> inventory = new Dictionary<string, Item>();
@@ -101,9 +99,9 @@ namespace TextRpg.Game_Object
         {
             _maxHp = 10000;
             _presentHp = 10000;
-            _level = 100;
+            _level = 1;
             _attack = 1000;
-            _presentExp = 0;      //현재경험치
+            _presentExp = 10;      //현재경험치
             _needMaxExp = 0;
             plsyerJob = new Ceo();
             _name = "신";
@@ -122,8 +120,8 @@ namespace TextRpg.Game_Object
             Console.Write("┌─  플레이어 스탯 ───────────────────────────────────────┐\n");
             Console.Write("  이름\t: {0}\t\t직업\t: {1}\n", _name, _job);
             Console.Write("  레벨\t: {0}\t\t공격력\t: {1}\n", _level, _attack);
-            Console.Write("  돈: {0}\t\t", _money);
-            Console.Write("  체력: {0} / {1}\n", _presentHp, _maxHp);
+            Console.Write("  돈\t: {0}\t\t", _money);
+            Console.Write("체력\t: {0} / {1}\n", _presentHp, _maxHp);
             Console.Write("  경험치: {0} / {1}\n", _presentExp, _needMaxExp);
             VerticalLine();
 
@@ -193,6 +191,7 @@ namespace TextRpg.Game_Object
 
         }
 
+        //레벨업!
         static private void LevelupCheck()
         {
             if (_presentExp >= _needMaxExp)
@@ -207,10 +206,20 @@ namespace TextRpg.Game_Object
                 _presentHp = _maxHp;
 
                 //커서는 조정
+
+
+                Textmanager.PopupInfo();
+                Console.SetCursorPosition(57, 17);  //왼쪽위
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                string i = "레벨 업!";
+                foreach (char c in i)
+                {
+                    Console.Write(c);
+                    Task.Delay(100).Wait();
+                }
+                Console.ForegroundColor = ConsoleColor.White;
+                Task.Delay(400).Wait();
                 Console.Clear();
-                Console.SetCursorPosition(20, 20);
-                Console.WriteLine("레벨업■■■■■■■■■");
-                Task.Delay(2000).Wait();
             }
             else { /*Do nothing*/}
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using TextRpg.In_Game_Scenes;
 
 namespace TextRpg.Game_Object
@@ -7,7 +8,7 @@ namespace TextRpg.Game_Object
     // 몬스터의 특징을 담은 객체
     public class Monster
     {
-        
+
         public int hp;
         public int maxhp;
         public string name = "";
@@ -57,15 +58,19 @@ namespace TextRpg.Game_Object
         // 적의 정보를 출력하는 함수
         public void PrintEnemyInfo()
         {
-            
+
             Console.SetCursorPosition(62, 29);
             Console.Write("┌─  몬스터 스탯 ─────────────────────────────────────────┐\n");
             Console.SetCursorPosition(62, 30);
-            Console.Write("  이름\t: {0}\n", this.name);
+            Console.Write("  이름\t: ");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(this.name);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
             Console.SetCursorPosition(62, 31);
             Console.Write("  레벨\t: {0}\t\t공격력\t: {1}\n", this.level, this.attack);
             Console.SetCursorPosition(62, 32);
-            Console.Write("  체력: {0} / {1}\n", this.hp, this.maxhp);
+            Console.Write("  체력\t: {0} / {1}\n", this.hp, this.maxhp);
             VerticalLine();
             Console.SetCursorPosition(62, 38);
             Console.WriteLine("└────────────────────────────────────────────────────────┘");
@@ -83,14 +88,15 @@ namespace TextRpg.Game_Object
                 Console.Write("│");
                 Console.SetCursorPosition(119, i + 30);
                 Console.Write("│");
+
             }
         }
 
-        //기본적으로 1, 2 번째 배열아이템을 반환함
+        //배열아이템을 반환함
         public string RandomeItem()
         {
             Random rand = new Random();
-            string result = this.item[rand.Next(0, 1 + 1)];
+            string result = this.item[rand.Next(0, this.item.Length)];
             return result;
         }
     }
@@ -99,6 +105,8 @@ namespace TextRpg.Game_Object
     public class MonsterSet
     {
         public List<Monster> monsterList = new List<Monster>();
+        public List<Monster> bossList = new List<Monster>();
+
         public MonsterSet()
         {
             monsterList.Add(new ArmedGroup());
@@ -106,14 +114,22 @@ namespace TextRpg.Game_Object
             monsterList.Add(new RatsPawns());
             monsterList.Add(new Hunter());
 
+            //첫번째 부터 10번째 진행부터 등장함
+            bossList.Add(new QueenOfRats());
+            bossList.Add(new ScaryPerson());
+            bossList.Add(new MrBreadEnvelope());
+            bossList.Add(new RealMan());
+            bossList.Add(new RealWoman());
         }
-    }
 
+
+    }
+    #region 일반 몬스터
     public class ArmedGroup : Monster
     {
         public ArmedGroup()
         {
-            this.hp = this.maxhp =200;
+            this.hp = this.maxhp = 200;
             this.name = "무장집단";
             this.experienceValue = 20;       //경험치
             this.level = 2;
@@ -164,6 +180,7 @@ namespace TextRpg.Game_Object
             this.haveMoney = 200;
         }
     }
+    #endregion
 
     #region 보스라인
     public class QueenOfRats : Monster
@@ -182,6 +199,68 @@ namespace TextRpg.Game_Object
         }
     }
 
+    public class ScaryPerson : Monster
+    {
+        //무서운 사람
+        public ScaryPerson()
+        {
+            this.boss = true;
+            this.hp = this.maxhp = 2000;
+            this.name = "무서운 사람";
+            this.experienceValue = 800;       //경험치
+            this.level = 9;
+            this.attack = 200;
+            this.item = new string[] { "귀여운 인형", "깜찍한 인형" };
+            this.haveMoney = 1000;
+        }
+    }
+    public class MrBreadEnvelope : Monster
+    {
+        //빵 봉투 아저씨
+        public MrBreadEnvelope()
+        {
+            this.boss = true;
+            this.hp = this.maxhp = 3000;
+            this.name = "빵 봉투 아저씨";
+            this.experienceValue = 1000;       //경험치
+            this.level = 23;
+            this.attack = 600;
+            this.item = new string[] { "무거운 대검", "우유", "권총" };
+            this.haveMoney = 2000;
+        }
+    }
+
+    public class RealMan : Monster
+    {
+        //상남자
+        public RealMan()
+        {
+            this.boss = true;
+            this.hp = this.maxhp = 5500;
+            this.name = "상남자";
+            this.experienceValue = 1500;       //경험치
+            this.level = 35;
+            this.attack = 700;
+            this.item = new string[] { "수박", "동전", "그래픽 카드" };
+            this.haveMoney = 4000;
+        }
+    }
+
+    public class RealWoman : Monster
+    {
+        //상남자
+        public RealWoman()
+        {
+            this.boss = true;
+            this.hp = this.maxhp = 8000;
+            this.name = "상여자";
+            this.experienceValue = 1500;       //경험치
+            this.level = 40;
+            this.attack = 500;
+            this.item = new string[] { "푸른 단검", "동전", "립스틱" };
+            this.haveMoney = 4000;
+        }
+    }
     #endregion
 
 }

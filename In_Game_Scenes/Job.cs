@@ -73,13 +73,25 @@ namespace TextRpg.In_Game_Scenes
     //스킬 구현
     public class PlayerSkill
     {
-        public PlayerSkill(ref Monster monster)
+
+        private int skillCnt;
+        public PlayerSkill(ref Monster monster, ref int num)
         {
+            skillCnt = num;
             PlayerSkills(ref monster);
+            --num;
         }
 
         private void PlayerSkills(ref Monster monster)
         {
+            if(skillCnt <= 0)
+            {
+                Textmanager.PopupInfo();
+                Console.SetCursorPosition(48, 17);  //가운데
+                Console.WriteLine("스킬을 사용 할 수 없습니다.");
+                Console.SetCursorPosition(0, 2);
+                return;
+            }
             Textmanager.SetWindow();
             Console.WriteLine("{0} 이(가) 스킬을 사용했다!", Player.GetPlayerName());
             Job playerJob = Player.plsyerJob;

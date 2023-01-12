@@ -58,7 +58,12 @@ namespace TextRpg.In_Game_Scenes
 
                 if (gameover)
                 {
-                    Console.WriteLine("\nㅁ게임을 종료하였습니다.");
+                    Console.SetCursorPosition(0,2);  //왼쪽위
+                    Console.Write("ㅇ");
+                    Textmanager.PopupInfo();
+                    Console.SetCursorPosition(55, 17);  //왼쪽위
+                    Console.WriteLine("- 사 망 -");
+                    Console.SetCursorPosition(0, 0);  //왼쪽위
                     break;
                 }
 

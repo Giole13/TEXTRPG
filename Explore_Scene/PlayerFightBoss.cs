@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace TextRpg.Explore_Scene
     {
         int bossCount;
         Monster boss;
+        bool backScene = false;
         public PlayerFightBoss(int bossCountNum)
         {
             bossCount = bossCountNum;
@@ -22,7 +24,20 @@ namespace TextRpg.Explore_Scene
         private void PlaterFightBossProgress()
         {
             SelectBoss();
+            if (backScene) { return; }
 
+            Textmanager.PopupInfo();
+            Console.SetCursorPosition(55, 17);
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            
+            string i = "보스등장!!";
+            foreach (char c in i)
+            {
+                Console.Write(c);
+                Task.Delay(600).Wait();
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+            Task.Delay(1000).Wait();
             while (true)
             {
                 //여기에 보스전 띄우기
@@ -44,8 +59,12 @@ namespace TextRpg.Explore_Scene
                 }
                 else if (Player._presentHp < 0)
                 {
-                    Textmanager.SetWindow();
-                    Console.WriteLine("당신은 죽었습니다.");
+                    Console.SetCursorPosition(0, 2);  //왼쪽위
+                    Console.Write("ㅇ");
+                    Textmanager.PopupInfo();
+                    Console.SetCursorPosition(55, 17);  //왼쪽위
+                    Console.WriteLine("- 사 망 -");
+                    Console.SetCursorPosition(0, 0);  //왼쪽위
                     Environment.Exit(0);
                 }
             }
@@ -54,15 +73,24 @@ namespace TextRpg.Explore_Scene
         //전투 횟수에 따라 보스 결정
         private void SelectBoss()
         {
-            if (bossCount == 10)
+            //10번째 마다
+            if ((bossCount % 10) == 0)
             {
+                if (new MonsterSet().bossList.Count < bossCount / 10)
+                {
+                    Console.SetCursorPosition(2, 2);
+                    Console.WriteLine("아직 보스가 안나왔어요 ㅠ");
+                    Console.ReadKey(true);
+                    backScene = true;
+                    return;
+                }
                 //10번 전투후 나오는 보스
-                boss = new QueenOfRats();
+                boss = new MonsterSet().bossList[bossCount / 10 - 1];
             }
             else { /*Do nothing*/}
         }
 
-
+        int skillCnt = 3;
         //플레이어 턴
         private void PlayerTurn()
         {
@@ -77,10 +105,10 @@ namespace TextRpg.Explore_Scene
                     PlayerAttack();
                     break;
                 case ConsoleKey.D2:
-                    new PlayerSkill(ref boss);
+                    new PlayerSkill(ref boss, ref skillCnt);
                     break;
                 default:
-                    break; 
+                    break;
 
             }
         }
